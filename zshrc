@@ -42,3 +42,6 @@ export GPGKEY=F580DCCE
 
 source ~/.zupa/z.sh
 source /home/florin/.rvm/scripts/rvm
+
+export PATH=~/bin:${PATH}
+export USE_LOCAL_ENGINE=true

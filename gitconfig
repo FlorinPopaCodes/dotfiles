@@ -24,3 +24,5 @@
     enabled = 1
 [push]
     default = upstream
+[core]
+	excludesfile = /home/florin/.gitignore_global
