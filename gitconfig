@@ -9,4 +9,4 @@
     interactive = auto
     status = auto
 [push]
-    default = upstream
+    default = current
