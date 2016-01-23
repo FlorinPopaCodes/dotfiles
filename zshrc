@@ -1,53 +1,41 @@
-CONFIGURE_OPTS="--with-readline-dir=/usr/include/readline"
+source /usr/share/zsh/scripts/antigen/antigen.zsh
 
-# Path to your oh-my-zsh configuration.
-ZSH=$HOME/.oh-my-zsh
+setopt HIST_IGNORE_ALL_DUPS
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-ZSH_THEME="mrtazz"
+antigen use oh-my-zsh
 
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+antigen bundles <<EOBUNDLES
+    archlinux
+    common-aliases
+    docker
+    extract
+    gem
+    git
+    mafredri/zsh-async
+    systemd
+    sindresorhus/pure
+    vim-interaction
+    zsh-users/zsh-completions src
+    zsh-users/zsh-history-substring-search
+    zsh-users/zsh-syntax-highlighting
+EOBUNDLES
 
-# Set to this to use case-sensitive completion
-# CASE_SENSITIVE="true"
+antigen apply
 
-# Comment this out to disable weekly auto-update checks
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment following line if you want to disable colors in ls
-# DISABLE_LS_COLORS="true"
-
-# Uncomment following line if you want to disable autosetting terminal title.
-#DISABLE_AUTO_TITLE="true"
-
-# Uncomment following line if you want red dots to be displayed while waiting for completion
-COMPLETION_WAITING_DOTS="true"
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git git-extras github extract sublime rvm gem rails3 ruby rsync ssh-agent gpg-agent pass pip tmux tmuxinator zsh-syntax-highlighting)
-
-source $ZSH/oh-my-zsh.sh
-
-# Customize to your needs...
-export PATH=/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
-
-export GPGKEY=F580DCCE
-
-source ~/.zupa/z.sh
-source /home/florin/.rvm/scripts/rvm
-
-export USE_LOCAL_ENGINE=true
-export ZSH_TMUX_AUTOSTART=true
-export EDITOR=vim
+# misc
+export EDITOR=gvim
 export SHELL=zsh
 
-# Removes the behaviour of trying to autocorrect args
-unsetopt correct_all  
-setopt correct
+# chruby
+source /usr/share/chruby/chruby.sh
+source /usr/share/chruby/auto.sh
+
+# fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# envoy
+envoy
+source <(envoy -p)
+
+# direnv
+eval "$(direnv hook zsh)"

@@ -1,4 +1,1 @@
-dotfiles
-========
-
-dotfiles
+Minimalist personal dotfiles.
