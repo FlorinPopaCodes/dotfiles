@@ -24,6 +24,7 @@ antigen apply
 
 # misc
 export EDITOR=gvim
+export LEDGER_FILE=~/Documents/Ledgers/Personal.dat
 export SHELL=zsh
 
 # chruby
