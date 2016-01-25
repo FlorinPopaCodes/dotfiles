@@ -33,10 +33,16 @@ values."
      javascript
      markdown
      org
-     ruby
+     (ruby :variables
+           ruby-version-manager 'chruby
+           ruby-test-runner 'rspec)
      ruby-on-rails
+     (shell :variables
+            shell-default-position 'bottom
+            shell-default-height 15)
      syntax-checking
      version-control
+     yaml
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these

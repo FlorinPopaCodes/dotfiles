@@ -8,7 +8,9 @@ antigen bundles <<EOBUNDLES
     archlinux
     common-aliases
     docker
+    emacs
     extract
+    fasd
     gem
     git
     mafredri/zsh-async
@@ -23,9 +25,10 @@ EOBUNDLES
 antigen apply
 
 # misc
-export EDITOR=gvim
 export LEDGER_FILE=~/Documents/Ledgers/Personal.dat
 export SHELL=zsh
+
+export PATH=$PATH:~/.local/bin:~/bin
 
 # chruby
 source /usr/share/chruby/chruby.sh
