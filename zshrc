@@ -24,22 +24,12 @@ EOBUNDLES
 
 antigen apply
 
-# misc
-export LEDGER_FILE=~/Documents/Ledgers/Personal.dat
-export SHELL=zsh
-
-export PATH=$PATH:~/.local/bin:~/bin
-
-# chruby
-source /usr/share/chruby/chruby.sh
-source /usr/share/chruby/auto.sh
-
-# fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 # envoy
 envoy
 source <(envoy -p)
 
 # direnv
 eval "$(direnv hook zsh)"
+
+# fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

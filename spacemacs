@@ -23,10 +23,14 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     auto-completion
+     (auto-completion :variables
+       auto-completion-return-key-behavior nil
+       auto-completion-tab-key-behavior 'complete
+       auto-completion-complete-with-key-sequence-delay 0.3
+       auto-completion-enable-sort-by-usage t)
      better-defaults
+     elixir
      emacs-lisp
-     eyebrowse
      finance
      git
      html
@@ -34,12 +38,13 @@ values."
      markdown
      org
      (ruby :variables
-           ruby-version-manager 'chruby
-           ruby-test-runner 'rspec)
+       ruby-enable-enh-ruby-mode t
+       ruby-version-manager 'chruby
+       ruby-test-runner 'rspec)
      ruby-on-rails
      (shell :variables
-            shell-default-position 'bottom
-            shell-default-height 15)
+       shell-default-position 'bottom
+       shell-default-height 15)
      syntax-checking
      version-control
      yaml
@@ -48,7 +53,9 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(
+     editorconfig
+     )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -175,7 +182,7 @@ values."
    dotspacemacs-enable-paste-micro-state nil
    ;; Which-key delay in seconds. The which-key buffer is the popup listing
    ;; the commands bound to the current keystroke sequence. (default 0.4)
-   dotspacemacs-which-key-delay 0.4
+   dotspacemacs-which-key-delay 0.6
    ;; Which-key frame position. Possible values are `right', `bottom' and
    ;; `right-then-bottom'. right-then-bottom tries to display the frame to the
    ;; right; if there is insufficient space it displays it at the bottom.
@@ -236,7 +243,10 @@ values."
    ;; `trailing' to delete only the whitespace at end of lines, `changed'to
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
-   dotspacemacs-whitespace-cleanup nil
+   dotspacemacs-whitespace-cleanup 'changed
+   ;;
+   ;;
+   vc-follow-symlinks t
    ))
 
 (defun dotspacemacs/user-init ()
@@ -250,10 +260,48 @@ in `dotspacemacs/user-config'."
   "Configuration function for user code.
 This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
-  (add-to-list 'auto-mode-alist '("\\.dat$" . ledger-mode))
-  (golden-ratio-mode 1)
+  (setq org-capture-templates
+    '(("t" "Todo" entry (file+headline "~/Documents/Notes/Agenda.org" "Tasks")
+        "* TODO %?\n  %i\n  %a")
+      ("c" "Calendar" entry (file+headline "~/Documents/Notes/Agenda.org" "Calendar")
+        "* TODO %?\n  %i\n  %a")
+      ("j" "Journal" entry (file+datetree "~/Documents/Notes/Journal.org")
+        "* %?\nEntered on %U\n  %i\n  %a")
+      ("b" "Book" entry (file+datetree "~/Documents/Notes/Journal.org")
+        "\n* %^{Book Title} %t :Reading: \n%[~/Documents/Notes/Templates/book.txt]\n")
+      ("g" "Morning Gratitute" entry (file+datetree "~/Documents/Notes/Journal.org")
+        "** Morning Gratitute Review :Gratitude: \n%[~/Documents/Notes/Templates/gratitude_morning.txt]\n")
+      ("f" "Evening Gratiute" entry (file+datetree "~/Documents/Notes/Journal.org")
+        "** Evening Gratitue Review :Gratitude: \n%[~/Documents/Notes/Templates/gratitude_evening.txt]\n")
+  ))
+  (editorconfig-mode 1)
+  (smartparens-global-mode 0)
   (setq split-width-threshold nil)
-  )
+  (global-git-commit-mode t)
+  (require 'chruby))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-agenda-files (quote ("~/Documents/Notes/Agenda.org")))
+ '(org-habit-following-days 1)
+ '(org-habit-graph-column 80)
+ '(org-habit-preceding-days 7)
+ '(org-habit-show-all-today t)
+ '(org-habit-show-habits-only-for-today nil)
+  '(org-modules
+     (quote
+       (org-bbdb org-bibtex org-crypt org-docview org-gnus org-habit org-id org-info org-inlinetask org-irc org-mhe org-rmail org-w3m)))
+ '(org-show-notification-handler "notify-send")
+ '(org-tags-column -80))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
+ '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
