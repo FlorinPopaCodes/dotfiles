@@ -23,13 +23,3 @@ antigen bundles <<EOBUNDLES
 EOBUNDLES
 
 antigen apply
-
-# envoy
-envoy
-source <(envoy -p)
-
-# direnv
-eval "$(direnv hook zsh)"
-
-# fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

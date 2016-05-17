@@ -27,10 +27,14 @@ values."
        auto-completion-return-key-behavior nil
        auto-completion-tab-key-behavior 'complete
        auto-completion-complete-with-key-sequence-delay 0.3
-       auto-completion-enable-sort-by-usage t)
+       auto-completion-enable-sort-by-usage t
+       auto-completion-enable-snippets-in-popup t
+       auto-completion-enable-help-tooltip t)
      better-defaults
+     colors
      elixir
      emacs-lisp
+     ess
      finance
      git
      html
@@ -53,11 +57,9 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(
-     editorconfig
-     )
+   dotspacemacs-additional-packages '(editorconfig)
    ;; A list of packages and/or extensions that will not be install and loaded.
-   dotspacemacs-excluded-packages '()
+    dotspacemacs-excluded-packages '(smartparens)
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
    ;; are declared in a layer which is not a member of
    ;; the list `dotspacemacs-configuration-layers'. (default t)
@@ -104,7 +106,7 @@ values."
    dotspacemacs-startup-lists '(projects recents bookmarks)
    ;; Number of recent files to show in the startup buffer. Ignored if
    ;; `dotspacemacs-startup-lists' doesn't include `recents'. (default 5)
-   dotspacemacs-startup-recent-list-size 10
+   dotspacemacs-startup-recent-list-size 5
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
@@ -219,7 +221,7 @@ values."
    ;; If non nil line numbers are turned on in all `prog-mode' and `text-mode'
    ;; derivatives. If set to `relative', also turns on relative line numbers.
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers 'relative
    ;; If non-nil smartparens-strict-mode will be enabled in programming modes.
    ;; (default nil)
    dotspacemacs-smartparens-strict-mode nil
@@ -243,9 +245,7 @@ values."
    ;; `trailing' to delete only the whitespace at end of lines, `changed'to
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
-   dotspacemacs-whitespace-cleanup 'changed
-   ;;
-   ;;
+   dotspacemacs-whitespace-cleanup nil
    vc-follow-symlinks t
    ))
 
@@ -288,16 +288,16 @@ layers configuration. You are free to put any user code."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(org-agenda-files (quote ("~/Documents/Notes/Agenda.org")))
- '(org-habit-following-days 1)
+ '(org-habit-following-days 3)
  '(org-habit-graph-column 80)
- '(org-habit-preceding-days 7)
+ '(org-habit-preceding-days 10)
  '(org-habit-show-all-today t)
  '(org-habit-show-habits-only-for-today nil)
   '(org-modules
      (quote
        (org-bbdb org-bibtex org-crypt org-docview org-gnus org-habit org-id org-info org-inlinetask org-irc org-mhe org-rmail org-w3m)))
  '(org-show-notification-handler "notify-send")
- '(org-tags-column -80))
+ '(org-tags-column 3))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
