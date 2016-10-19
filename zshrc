@@ -6,6 +6,8 @@ antigen use oh-my-zsh
 
 antigen bundles <<EOBUNDLES
     archlinux
+    colored-man-pages
+    command-not-found
     common-aliases
     docker
     emacs
@@ -13,13 +15,17 @@ antigen bundles <<EOBUNDLES
     fasd
     gem
     git
+    git-flow-avh
     mafredri/zsh-async
-    systemd
+    rupa/z
     sindresorhus/pure
+    systemd
+    tmux
     vim-interaction
-    zsh-users/zsh-completions src
-    zsh-users/zsh-history-substring-search
-    zsh-users/zsh-syntax-highlighting
+    zsh-users/zsh-completions
 EOBUNDLES
 
 antigen apply
+
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

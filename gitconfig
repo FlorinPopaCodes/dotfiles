@@ -10,3 +10,5 @@
     status = auto
 [push]
     default = current
+[alias]
+    up = pull --rebase --autostash

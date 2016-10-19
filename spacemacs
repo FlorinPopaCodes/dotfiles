@@ -11,6 +11,20 @@ values."
    ;; `+distribution'. For now available distributions are `spacemacs-base'
    ;; or `spacemacs'. (default 'spacemacs)
    dotspacemacs-distribution 'spacemacs
+   ;; Lazy installation of layers (i.e. layers are installed only when a file
+   ;; with a supported type is opened). Possible values are `all', `unused'
+   ;; and `nil'. `unused' will lazy install only unused layers (i.e. layers
+   ;; not listed in variable `dotspacemacs-configuration-layers'), `all' will
+   ;; lazy install any layer that support lazy installation even the layers
+   ;; listed in `dotspacemacs-configuration-layers'. `nil' disable the lazy
+   ;; installation feature and you have to explicitly list a layer in the
+   ;; variable `dotspacemacs-configuration-layers' to install it.
+   ;; (default 'unused)
+   dotspacemacs-enable-lazy-installation 'unused
+   ;; If non-nil then Spacemacs will ask for confirmation before installing
+   ;; a layer lazily. (default t)
+   dotspacemacs-ask-for-lazy-installation t
+   ;; If non-nil layers with lazy install support are lazy installed.
    ;; List of additional paths where to look for configuration layers.
    ;; Paths must have a trailing slash (i.e. `~/.mycontribs/')
    dotspacemacs-configuration-layer-path '()
@@ -18,11 +32,7 @@ values."
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
    '(
-     ;; ----------------------------------------------------------------
-     ;; Example of useful layers you may want to use right away.
-     ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
-     ;; <M-m f e R> (Emacs style) to install them.
-     ;; ----------------------------------------------------------------
+     ansible
      (auto-completion :variables
        auto-completion-return-key-behavior nil
        auto-completion-tab-key-behavior 'complete
@@ -37,12 +47,13 @@ values."
      ess
      finance
      git
+     helm
      html
      javascript
      markdown
      org
      (ruby :variables
-       ruby-enable-enh-ruby-mode t
+       ;; ruby-enable-enh-ruby-mode t
        ruby-version-manager 'chruby
        ruby-test-runner 'rspec)
      ruby-on-rails
@@ -59,11 +70,19 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(editorconfig)
    ;; A list of packages and/or extensions that will not be install and loaded.
-    dotspacemacs-excluded-packages '(smartparens)
+   dotspacemacs-excluded-packages '(smartparens company)
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
    ;; are declared in a layer which is not a member of
    ;; the list `dotspacemacs-configuration-layers'. (default t)
-   dotspacemacs-delete-orphan-packages t))
+   dotspacemacs-delete-orphan-packages t
+   ;; Defines the behaviour of Spacemacs when installing packages.
+   ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
+   ;; `used-only' installs only explicitly used packages and uninstall any
+   ;; unused packages as well as their unused dependencies.
+   ;; `used-but-keep-unused' installs only the used packages but won't uninstall
+   ;; them if they become unused. `all' installs *all* packages supported by
+   ;; Spacemacs and never uninstall them. (default is `used-only')
+   dotspacemacs-install-packages 'used-only))
 
 (defun dotspacemacs/init ()
   "Initialization function.
@@ -80,7 +99,7 @@ values."
    ;; This variable has no effect if Emacs is launched with the parameter
    ;; `--insecure' which forces the value of this variable to nil.
    ;; (default t)
-   dotspacemacs-elpa-https t
+   dotspacemacs-elpa-https nil
    ;; Maximum allowed time in seconds to contact an ELPA repository.
    dotspacemacs-elpa-timeout 5
    ;; If non nil then spacemacs will check for updates at startup
@@ -110,9 +129,9 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(spacemacs-dark
+   dotspacemacs-themes '(solarized-light
+                         spacemacs-dark
                          spacemacs-light
-                         solarized-light
                          solarized-dark
                          leuven
                          monokai
@@ -122,7 +141,7 @@ values."
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 13
+                               :size 12
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -213,7 +232,7 @@ values."
    ;; Transparency can be toggled through `toggle-transparency'. (default 90)
    dotspacemacs-inactive-transparency 90
    ;; If non nil unicode symbols are displayed in the mode line. (default t)
-   dotspacemacs-mode-line-unicode-symbols nil
+   dotspacemacs-mode-line-unicode-symbols t
    ;; If non nil smooth scrolling (native-scrolling) is enabled. Smooth
    ;; scrolling overrides the default behavior of Emacs which recenters the
    ;; point when it reaches the top or bottom of the screen. (default t)
@@ -221,7 +240,7 @@ values."
    ;; If non nil line numbers are turned on in all `prog-mode' and `text-mode'
    ;; derivatives. If set to `relative', also turns on relative line numbers.
    ;; (default nil)
-   dotspacemacs-line-numbers 'relative
+   dotspacemacs-line-numbers 'prog-mode
    ;; If non-nil smartparens-strict-mode will be enabled in programming modes.
    ;; (default nil)
    dotspacemacs-smartparens-strict-mode nil
@@ -260,6 +279,8 @@ in `dotspacemacs/user-config'."
   "Configuration function for user code.
 This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
+  (setq custom-file "~/.spacemacs.custom")
+  (load-file custom-file)
   (setq org-capture-templates
     '(("t" "Todo" entry (file+headline "~/Documents/Notes/Agenda.org" "Tasks")
         "* TODO %?\n  %i\n  %a")
@@ -278,30 +299,5 @@ layers configuration. You are free to put any user code."
   (smartparens-global-mode 0)
   (setq split-width-threshold nil)
   (global-git-commit-mode t)
+  (yas-global-mode t)
   (require 'chruby))
-
-;; Do not write anything past this comment. This is where Emacs will
-;; auto-generate custom variable definitions.
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(org-agenda-files (quote ("~/Documents/Notes/Agenda.org")))
- '(org-habit-following-days 3)
- '(org-habit-graph-column 80)
- '(org-habit-preceding-days 10)
- '(org-habit-show-all-today t)
- '(org-habit-show-habits-only-for-today nil)
-  '(org-modules
-     (quote
-       (org-bbdb org-bibtex org-crypt org-docview org-gnus org-habit org-id org-info org-inlinetask org-irc org-mhe org-rmail org-w3m)))
- '(org-show-notification-handler "notify-send")
- '(org-tags-column 3))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
- '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
