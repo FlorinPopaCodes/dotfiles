@@ -11,19 +11,19 @@ antigen bundles <<EOBUNDLES
     docker
     emacs
     extract
-    fasd
     gem
     git
-    git-flow-avh
-    globalias
+    kiurchv/asdf.plugin.zsh
     mafredri/zsh-async
-    rupa/z
     sindresorhus/pure
     systemd
+    yarn
     zsh-users/zsh-completions
 EOBUNDLES
 
 antigen apply
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 eval "$(direnv hook zsh)"
+
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh

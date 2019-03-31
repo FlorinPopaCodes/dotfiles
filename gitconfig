@@ -1,14 +1,10 @@
 [user]
     name = Florin Popa
-    email = pp.flrn@gmail.com
-    signingkey = pp.flrn@gmail.com
+    email = popaflorin@protonmail.com
+    signingkey = 0x2CDF5ADFF3D7164E
 [color]
     ui = auto
-    branch = auto
-    diff = auto
-    interactive = auto
-    status = auto
 [push]
     default = current
-[alias]
-    up = pull --rebase --autostash
+[core]
+    excludesfile = ~/.gitignore_global
