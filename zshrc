@@ -13,7 +13,8 @@ antigen bundles <<EOBUNDLES
     extract
     gem
     git
-    kiurchv/asdf.plugin.zsh
+    fzf
+    asdf
     mafredri/zsh-async
     sindresorhus/pure
     systemd
@@ -24,6 +25,3 @@ EOBUNDLES
 antigen apply
 
 eval "$(direnv hook zsh)"
-
-source /usr/share/fzf/key-bindings.zsh
-source /usr/share/fzf/completion.zsh
