@@ -8,3 +8,6 @@
     default = current
 [core]
     excludesfile = ~/.gitignore_global
+    mergeoptions = --no-edit
+[merge]
+    tool = meld
