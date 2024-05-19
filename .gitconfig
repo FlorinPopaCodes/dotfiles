@@ -7,7 +7,7 @@
 [push]
     default = current
 [core]
-    excludesfile = ~/.gitignore
+    excludesfile = ~/.gitignore_global
     mergeoptions = --no-edit
 
 [filter "lfs"]

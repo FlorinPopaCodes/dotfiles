@@ -7,6 +7,8 @@ Optionally, check if I can use https://www.cachix.org/ to push changes to each e
 # TODO
 
 - [ ] stow
+- [ ] ~/.config/kitty
+- [ ] gitleaks for security
 - [ ] git project config sync
 - [ ] git signing key sync
 - [ ] ssh 1password sync
@@ -18,13 +20,17 @@ Optionally, check if I can use https://www.cachix.org/ to push changes to each e
 ```zsh
   brew install git stow
   git clone git@github.com:FlorinPopaCodes/dotfiles.git ~/.dotfiles
+  cd ~/.dotfiles
+  stow .
   ???
 ```
 
 ### Stow Usage
 
+Overwrite files from ~/ to ~/.dotfiles with:
+
 ```zsh
-  stow -t ~ <folder>
+  stow --adopt .
 ```
 
 # Thanks
@@ -33,3 +39,7 @@ Optionally, check if I can use https://www.cachix.org/ to push changes to each e
   - dotfiles https://github.com/dreamsofautonomy/dotfiles/tree/main
   - stow video https://youtu.be/y6XCebnB9gs?si=c68Ym91q6mN2brv3
   - zsh config video https://www.youtube.com/watch?v=ud7YxC33Z3w
+
+# Quick Reference
+
+- [Stow Ignore Lists](https://www.gnu.org/software/stow/manual/stow.html#Types-And-Syntax-Of-Ignore-Lists)
