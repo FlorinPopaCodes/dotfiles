@@ -1,6 +1,7 @@
 [user]
     name = Florin Popa
     email = 456185+FlorinPopaCodes@users.noreply.github.com
+    signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBoDrobY6yVanyC6bncei3kseeYawWXwrdT+i+cSsAiz
 [color]
     ui = auto
 [push]
@@ -8,10 +9,15 @@
 [core]
     excludesfile = ~/.gitignore
     mergeoptions = --no-edit
-[commit]
-    gpgsign = true
+
 [filter "lfs"]
 	required = true
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
+[commit]
+    gpgsign = true
+[gpg]
+  format = ssh
+[gpg "ssh"]
+  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
