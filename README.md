@@ -6,8 +6,8 @@ Optionally, check if I can use https://www.cachix.org/ to push changes to each e
 
 # TODO
 
-- [ ] stow
-- [ ] ~/.config/kitty
+- [x] stow
+- [x] ~/.config/kitty
 - [ ] gitleaks for security
 - [ ] git project config sync
 - [ ] git signing key sync
@@ -31,6 +31,12 @@ Overwrite files from ~/ to ~/.dotfiles with:
 
 ```zsh
   stow --adopt .
+```
+
+Testing the stow command:
+
+```zsh
+  stow --verbose --simulate --adopt .
 ```
 
 # Thanks
