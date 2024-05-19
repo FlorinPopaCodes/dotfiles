@@ -1,13 +1,17 @@
 [user]
     name = Florin Popa
     email = 456185+FlorinPopaCodes@users.noreply.github.com
-    signingkey = 0x2CDF5ADFF3D7164E
 [color]
     ui = auto
 [push]
     default = current
 [core]
-    excludesfile = ~/.gitignore_global
+    excludesfile = ~/.gitignore
     mergeoptions = --no-edit
-[merge]
-    tool = meld
+[commit]
+    gpgsign = true
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
