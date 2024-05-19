@@ -4,6 +4,15 @@ The plan is to update the current dotfile so I can more easily sync them across 
 
 Optionally, check if I can use https://www.cachix.org/ to push changes to each env automagically.
 
+# TODO
+
+- [ ] stow
+- [ ] git project config sync
+- [ ] git signing key sync
+- [ ] ssh 1password sync
+- [ ] works on both mac and archlinux
+- [ ] nix or something similar
+
 # Install
 
 ```zsh
@@ -17,3 +26,10 @@ Optionally, check if I can use https://www.cachix.org/ to push changes to each e
 ```zsh
   stow -t ~ <folder>
 ```
+
+# Thanks
+
+- Dreams of Autonomy
+  - dotfiles https://github.com/dreamsofautonomy/dotfiles/tree/main
+  - stow video https://youtu.be/y6XCebnB9gs?si=c68Ym91q6mN2brv3
+  - zsh config video https://www.youtube.com/watch?v=ud7YxC33Z3w
