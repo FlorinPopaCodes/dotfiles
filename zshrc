@@ -1,27 +1,28 @@
-source /usr/share/zsh/share/antigen.zsh
+source $HOMEBREW_PREFIX/share/antigen/antigen.zsh
+antigen init $HOME/.antigenrc
 
-antigen use oh-my-zsh
+eval "$(starship init zsh)"
+zsh-defer eval "$(direnv hook zsh)"
+zsh-defer eval "$(rbenv init - zsh)" # Slow
+zsh-defer eval "$(gh copilot alias -- zsh)" # Can be improved
+if command -v ngrok &>/dev/null; then
+  zsh-defer eval "$(ngrok completion)"
+fi
+zsh-defer eval $(thefuck --alias f)
 
-antigen bundles <<EOBUNDLES
-    archlinux
-    bundler
-    colored-man-pages
-    command-not-found
-    common-aliases
-    docker
-    emacs
-    extract
-    gem
-    git
-    fzf
-    asdf
-    mafredri/zsh-async
-    sindresorhus/pure
-    systemd
-    yarn
-    zsh-users/zsh-completions
-EOBUNDLES
+alias rm="trash"
 
-antigen apply
+export PATH="$HOME/.rbenv/bin:$PATH"
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+export EDITOR="nvim"
+export HOMEBREW_NO_AUTO_UPDATE=1
 
-eval "$(direnv hook zsh)"
+
+# fpath=(~/.stripe $fpath)
+
+# Slow
+# if type brew &>/dev/null; then
+#     FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+#     autoload -Uz compinit
+#     compinit
+# fi
