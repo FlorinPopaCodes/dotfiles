@@ -9,7 +9,8 @@ Optionally, check if I can use https://www.cachix.org/ to push changes to each e
 - [x] stow
 - [x] ~/.config/kitty
 - [x] sync .antigenrc
-- [ ] move to brew cask list of common apps
+- [x] move to brew cask list of common apps
+  - [ ] missing apps?
 - [ ] gitleaks for security
 - [ ] git project config sync
 - [ ] git signing key sync
