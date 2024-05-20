@@ -9,15 +9,15 @@
 [core]
     excludesfile = ~/.gitignore_global
     mergeoptions = --no-edit
-
 [filter "lfs"]
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
 [commit]
     gpgsign = true
 [gpg]
-  format = ssh
+    format = ssh
 [gpg "ssh"]
-  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+    program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+[url "ssh://git@github.com/"]
+    insteadOf = https://github.com/
