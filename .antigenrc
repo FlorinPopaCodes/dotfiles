@@ -1,0 +1,19 @@
+antigen use oh-my-zsh
+
+antigen bundles <<EOBUNDLES
+    archlinux
+    bundler
+    colored-man-pages
+    command-not-found
+    common-aliases
+    extract
+    gem
+    git
+    fzf
+    asdf
+    systemd
+    yarn
+    zsh-users/zsh-completions
+EOBUNDLES
+
+antigen apply
