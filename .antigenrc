@@ -1,19 +1,18 @@
 antigen use oh-my-zsh
 
 antigen bundles <<EOBUNDLES
-    archlinux
     bundler
     colored-man-pages
-    command-not-found
     common-aliases
-    extract
+    fzf
     gem
     git
-    fzf
-    asdf
-    systemd
+    Kube-ps1
+    kubectl
+    romkatv/zsh-defer
     yarn
     zsh-users/zsh-completions
+    zsh-users/zsh-syntax-highlighting
 EOBUNDLES
 
 antigen apply

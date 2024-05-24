@@ -15,11 +15,8 @@ eval $(thefuck --alias f)
 
 alias rm="trash"
 
-export PATH="$HOME/.rbenv/bin:$PATH"
-export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 export EDITOR="nvim"
 export HOMEBREW_NO_AUTO_UPDATE=1
-
 
 # fpath=(~/.stripe $fpath)
 
@@ -29,6 +26,7 @@ export HOMEBREW_NO_AUTO_UPDATE=1
 #     autoload -Uz compinit
 #     compinit
 # fi
+
 if command -v gcloud &>/dev/null; then
     source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
     source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
