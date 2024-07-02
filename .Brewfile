@@ -22,7 +22,6 @@ brew "cmake"
 brew "p11-kit"
 brew "unbound"
 brew "gnutls"
-brew "colima", restart_service: true
 brew "coreutils"
 brew "deno"
 brew "direnv"
