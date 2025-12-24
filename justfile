@@ -2,7 +2,7 @@
 # Usage: just <recipe>
 
 set dotenv-load
-set shell := ["zsh", "-cu"]
+set shell := ["bash", "-cu"]
 
 home := env_var("HOME")
 dotfiles := justfile_directory()
@@ -48,29 +48,35 @@ adopt:
 # Install core CLI tools
 brew-core: _ensure-macos _ensure-brew
     @echo "Installing core packages..."
-    brew bundle --file={{dotfiles}}/macos/Brewfile.core
+    brew bundle install --file={{dotfiles}}/macos/Brewfile.core
 
 # Install GUI apps
 brew-apps: _ensure-macos _ensure-brew
     @echo "Installing GUI apps..."
-    brew bundle --file={{dotfiles}}/macos/Brewfile.apps
+    brew bundle install --file={{dotfiles}}/macos/Brewfile.apps
 
 # Install dev tools
 brew-dev: _ensure-macos _ensure-brew
     @echo "Installing dev tools..."
-    brew bundle --file={{dotfiles}}/macos/Brewfile.dev
+    brew bundle install --file={{dotfiles}}/macos/Brewfile.dev
 
 # Install all brew packages
 brew-all: brew-core brew-apps brew-dev
 
-# Check what would be installed
+# Check what would be installed (shows all, fails if any missing)
 brew-check: _ensure-macos _ensure-brew
-    @echo "=== Core packages ==="
-    brew bundle check --file={{dotfiles}}/macos/Brewfile.core || true
-    @echo "\n=== GUI apps ==="
-    brew bundle check --file={{dotfiles}}/macos/Brewfile.apps || true
-    @echo "\n=== Dev tools ==="
-    brew bundle check --file={{dotfiles}}/macos/Brewfile.dev || true
+    #!/usr/bin/env bash
+    set -u
+    failed=0
+    echo "=== Core packages ==="
+    brew bundle check --file={{dotfiles}}/macos/Brewfile.core || failed=1
+    echo ""
+    echo "=== GUI apps ==="
+    brew bundle check --file={{dotfiles}}/macos/Brewfile.apps || failed=1
+    echo ""
+    echo "=== Dev tools ==="
+    brew bundle check --file={{dotfiles}}/macos/Brewfile.dev || failed=1
+    exit $failed
 
 # Dump current brew packages to Brewfiles
 brew-dump: _ensure-macos _ensure-brew
@@ -144,7 +150,8 @@ _ensure-arch:
 status:
     @echo "=== Symlink Status ==="
     @ls -la {{home}}/.zshrc {{home}}/.gitconfig {{home}}/.config/kitty/kitty.conf {{home}}/.config/starship.toml {{home}}/.config/ghostty 2>/dev/null || echo "Some links missing"
-    @echo "\n=== Git Status ==="
+    @echo ""
+    @echo "=== Git Status ==="
     @cd {{dotfiles}} && git status --short
 
 # Show OS info
