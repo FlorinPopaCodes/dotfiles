@@ -13,6 +13,8 @@ brew "tlrc"
 brew "ripgrep"
 brew "the_silver_searcher"
 brew "fzf"
+brew "bat"
+brew "eza"
 
 # Shell
 brew "bash"
