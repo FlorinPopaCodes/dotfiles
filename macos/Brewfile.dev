@@ -61,18 +61,13 @@ brew "act"
 brew "mysql-client"
 brew "mysql-client@8.4"
 brew "mysql@8.0"
-brew "postgresql@14"
-brew "meilisearch"
 
 # Cloud and DevOps
 brew "flyctl"
 brew "opentofu"
-brew "cf-terraforming"
 brew "hashicorp/tap/vlt"
 brew "gocardless/taps/cli"
-brew "supabase/tap/supabase"
 brew "hookdeck/hookdeck/hookdeck"
-brew "stripe/stripe-cli/stripe"
 
 # API tools
 brew "protobuf"
