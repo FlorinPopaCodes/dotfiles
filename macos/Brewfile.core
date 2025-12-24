@@ -15,6 +15,7 @@ brew "the_silver_searcher"
 brew "fzf"
 
 # Shell
+brew "bash"
 brew "zinit"
 brew "starship"
 brew "thefuck"

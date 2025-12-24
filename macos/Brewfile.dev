@@ -11,10 +11,13 @@ tap "qmk/qmk"
 tap "stripe/stripe-cli"
 tap "supabase/tap"
 tap "twilio/brew"
+tap "steveyegge/beads"
+tap "withgraphite/tap"
 
 # Build dependencies
 brew "cmake"
 brew "gcc"
+brew "llvm"
 brew "llvm@17"
 brew "openssl@3"
 brew "ncurses"
@@ -25,6 +28,7 @@ brew "zstd"
 
 # Languages and runtimes
 brew "node"
+brew "pnpm"
 brew "deno"
 brew "oven-sh/bun/bun"
 brew "python@3.10"
@@ -93,6 +97,12 @@ brew "ghostscript"
 brew "poppler"
 brew "pillow"
 brew "yt-dlp"
+
+# AI and CLI tools
+brew "ast-grep"
+brew "gemini-cli"
+brew "opencode"
+brew "steveyegge/beads/bd"
 
 # Other dev tools
 brew "gnu-getopt"

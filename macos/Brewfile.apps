@@ -12,7 +12,7 @@ cask "1password-cli"
 cask "raycast"
 cask "obsidian"
 cask "notion"
-cask "todoist"
+cask "todoist-app"
 cask "anki"
 
 # Communication
