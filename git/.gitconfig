@@ -6,10 +6,25 @@
     ui = auto
 [push]
     default = current
+    autoSetupRemote = true
+    followTags = true
+[fetch]
+    prune = true
+    pruneTags = true
+[pull]
+    rebase = true
+[rebase]
+    autoStash = true
+    autoSquash = true
+    updateRefs = true
+    missingCommitsCheck = error
+[rerere]
+    enabled = true
+[init]
+    defaultBranch = main
 [core]
     pager = delta
     excludesfile = ~/.gitignore_global
-    mergeoptions = --no-edit
     hooksPath = ~/.git-hooks
 [filter "lfs"]
     clean = git-lfs clean -- %f
@@ -28,9 +43,16 @@
 [delta]
     navigate = true    # use n and N to move between diff sections
 [merge]
-    conflictstyle = diff3
+    conflictstyle = zdiff3
 [diff]
     colorMoved = default
+    algorithm = histogram
+[branch]
+    sort = -committerdate
+[tag]
+    sort = -version:refname
+[help]
+    autocorrect = prompt
 [gitbutler]
 	aiModelProvider = anthropic
 	aiAnthropicKeyOption = butlerAPI
