@@ -152,6 +152,59 @@ _ensure-macos:
 _ensure-arch:
     @[ -f /etc/arch-release ] || (echo "This recipe is Arch Linux only" && exit 1)
 
+# === CRON/LAUNCHD OPERATIONS (macOS) ===
+
+# Install all launchd jobs
+cron-install: _ensure-macos
+    @echo "Installing launchd jobs..."
+    @for plist in {{dotfiles}}/cron/launchd/Library/LaunchAgents/*.plist; do \
+        name=$(basename "$plist"); \
+        cp "$plist" ~/Library/LaunchAgents/; \
+        launchctl unload ~/Library/LaunchAgents/"$name" 2>/dev/null || true; \
+        launchctl load ~/Library/LaunchAgents/"$name"; \
+        echo "Installed: $name"; \
+    done
+    @echo "Done! Use 'just cron-status' to verify."
+
+# Uninstall all launchd jobs
+cron-uninstall: _ensure-macos
+    @echo "Uninstalling launchd jobs..."
+    @for plist in {{dotfiles}}/cron/launchd/Library/LaunchAgents/*.plist; do \
+        name=$(basename "$plist"); \
+        launchctl unload ~/Library/LaunchAgents/"$name" 2>/dev/null || true; \
+        rm -f ~/Library/LaunchAgents/"$name"; \
+        echo "Removed: $name"; \
+    done
+    @echo "Done!"
+
+# Show status of all cron jobs
+cron-status: _ensure-macos
+    @echo "=== Installed LaunchAgents ==="
+    @for plist in {{dotfiles}}/cron/launchd/Library/LaunchAgents/*.plist; do \
+        name=$(basename "$plist" .plist); \
+        if launchctl list | grep -q "$name"; then \
+            echo "✓ $name (loaded)"; \
+        else \
+            echo "✗ $name (not loaded)"; \
+        fi; \
+    done
+
+# Show cron job logs
+cron-logs job="gtrash-prune":
+    @echo "=== Application Log ==="
+    @tail -20 ~/.local/log/{{job}}.log 2>/dev/null || echo "No log file yet"
+    @echo ""
+    @echo "=== launchd stdout ==="
+    @tail -10 /tmp/com.florinpopa.{{job}}.stdout.log 2>/dev/null || echo "No stdout log"
+    @echo ""
+    @echo "=== launchd stderr ==="
+    @tail -10 /tmp/com.florinpopa.{{job}}.stderr.log 2>/dev/null || echo "No stderr log"
+
+# Run a cron script manually for testing
+cron-test job="gtrash-prune":
+    @echo "Running {{job}} manually..."
+    {{dotfiles}}/cron/scripts/{{job}}.sh
+
 # === INFO ===
 
 # Show current stow status
