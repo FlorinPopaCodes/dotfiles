@@ -36,7 +36,6 @@ brew "gpgme"
 brew "pinentry-mac"
 brew "hopenpgp-tools"
 brew "ykman"
-brew "ykpers"
 
 # Essentials
 brew "macos-trash", link: true
