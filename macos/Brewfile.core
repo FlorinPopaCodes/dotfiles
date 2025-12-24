@@ -28,11 +28,12 @@ brew "neovim"
 # Git
 brew "gh"
 brew "git-delta"
-brew "git-absorb"
+brew "git-absorb" # Remove
 brew "git-lfs"
 brew "lefthook"
 
 # Security
+# TODO: replace with 1pass ssh key and gpg signing
 brew "gitleaks"
 brew "gnupg"
 brew "gpgme"
