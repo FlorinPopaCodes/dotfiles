@@ -91,7 +91,11 @@ if command -v gcloud &>/dev/null; then
 fi
 
 # === ALIASES ===
-alias rm="trash"
+# Safe delete: gtrash moves to XDG trash (~/.local/share/Trash)
+alias rm="gtrash put --rm-mode"
+alias rr="gtrash restore"   # Interactive TUI restore
+alias rl="gtrash find"      # List trashed files
+alias rp="gtrash prune --day 30"  # Clean files older than 30 days
 
 # Modern ls with eza
 alias ls="eza --icons"
