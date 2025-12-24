@@ -15,7 +15,7 @@ brew "the_silver_searcher"
 brew "fzf"
 
 # Shell
-brew "antigen"
+brew "zinit"
 brew "starship"
 brew "thefuck"
 brew "direnv"

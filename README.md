@@ -6,7 +6,7 @@ Personal dotfiles managed with [GNU Stow](https://www.gnu.org/software/stow/) an
 
 ```
 ~/.dotfiles/
-├── shell/          # zsh, antigen configs
+├── shell/          # zsh, zinit configs
 ├── git/            # gitconfig, gitignore
 ├── starship/       # Starship prompt config
 ├── terminal/
@@ -60,7 +60,7 @@ just info         # Show environment info
 
 | Module | Description |
 |--------|-------------|
-| `shell` | zsh config, antigen plugins, aliases |
+| `shell` | zsh config, zinit plugins, aliases |
 | `git` | git config with delta, GPG signing via 1Password |
 | `starship` | Custom prompt with git status and time |
 | `terminal/kitty` | Kitty config with Solarized Light theme |

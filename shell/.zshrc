@@ -1,5 +1,27 @@
-source $HOMEBREW_PREFIX/share/antigen/antigen.zsh
-antigen init $HOME/.antigenrc
+# Zinit plugin manager
+source $HOMEBREW_PREFIX/opt/zinit/zinit.zsh
+
+# Oh-my-zsh plugins (as snippets)
+zinit snippet OMZP::bundler
+zinit snippet OMZP::colored-man-pages
+zinit snippet OMZP::common-aliases
+zinit snippet OMZP::fzf
+zinit snippet OMZP::gem
+zinit snippet OMZP::git
+zinit snippet OMZP::kube-ps1
+zinit snippet OMZP::kubectl
+zinit snippet OMZP::yarn
+
+# External plugins
+zinit light romkatv/zsh-defer
+
+# Completions (with blockf to prevent conflicts)
+zinit ice blockf
+zinit light zsh-users/zsh-completions
+autoload -Uz compinit && compinit
+
+# Syntax highlighting MUST be loaded last
+zinit light zsh-users/zsh-syntax-highlighting
 
 eval "$(starship init zsh)"
 eval "$(direnv hook zsh)"
