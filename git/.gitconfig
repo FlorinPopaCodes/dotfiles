@@ -49,6 +49,7 @@
     algorithm = histogram
 [branch]
     sort = -committerdate
+    autoSetupMerge = simple
 [tag]
     sort = -version:refname
 [help]
