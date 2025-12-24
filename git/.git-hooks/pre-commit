@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+# Global pre-commit hook: runs gitleaks on staged changes
+# Part of dotfiles - distributed via stow
+
+set -euo pipefail
+
+# Check if gitleaks is installed
+if ! command -v gitleaks &>/dev/null; then
+    echo "Warning: gitleaks not found, skipping secret scan"
+    echo "Install with: brew install gitleaks"
+else
+    # Run gitleaks silently, only show output on failure
+    if ! gitleaks git --staged --pre-commit --no-banner --log-level error 2>&1; then
+        echo ""
+        echo "Secrets detected! Commit blocked."
+        echo ""
+        echo "Run 'gitleaks git --staged --pre-commit' to see details."
+        echo ""
+        echo "To fix:"
+        echo "  1. Remove the secret from your code"
+        echo "  2. If false positive, add 'gitleaks:allow' as inline comment"
+        echo ""
+        exit 1
+    fi
+fi
+
+# Passthrough: Run project's pre-commit hook if it exists
+# This allows project-specific hooks (linters, tests) to still run
+# even though core.hooksPath overrides .git/hooks
+GIT_DIR="$(git rev-parse --git-dir 2>/dev/null)"
+PROJECT_HOOK="${GIT_DIR}/hooks/pre-commit"
+
+if [[ -x "$PROJECT_HOOK" ]]; then
+    exec "$PROJECT_HOOK" "$@"
+fi
+
+exit 0
