@@ -33,6 +33,7 @@ brew "git-lfs"
 brew "lefthook"
 
 # Security
+brew "gitleaks"
 brew "gnupg"
 brew "gpgme"
 brew "pinentry-mac"
