@@ -22,8 +22,8 @@ for dir in ${append_dirs[@]}; do
     fi
 done
 
-# Prepending directories (reversed to maintain order)
-for dir in ${append_dirs[@]}; do
+# Prepending directories
+for dir in ${prepend_dirs[@]}; do
     if [[ -d $dir ]]; then
         path=("$dir" $path)
     fi

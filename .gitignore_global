@@ -123,3 +123,4 @@ fabric.properties
 .idea/
 .irb_history
 .envrc
+*.local.json

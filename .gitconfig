@@ -7,6 +7,7 @@
 [push]
     default = current
 [core]
+    pager = delta
     excludesfile = ~/.gitignore_global
     mergeoptions = --no-edit
 [filter "lfs"]
@@ -21,3 +22,14 @@
     program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
 [url "ssh://git@github.com/"]
     insteadOf = https://github.com/
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    navigate = true    # use n and N to move between diff sections
+[merge]
+    conflictstyle = diff3
+[diff]
+    colorMoved = default
+[gitbutler]
+	aiModelProvider = anthropic
+	aiAnthropicKeyOption = butlerAPI

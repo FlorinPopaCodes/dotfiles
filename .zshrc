@@ -5,9 +5,6 @@ eval "$(starship init zsh)"
 eval "$(direnv hook zsh)"
 eval "$(rbenv init - zsh)" # Slow
 eval "$(fzf --zsh)"
-# https://docs.github.com/en/copilot/github-copilot-in-the-cli/setting-up-github-copilot-in-the-cli
-# Check if command exists before running it
-eval "$(gh copilot alias -- zsh)" # Can be improved
 if command -v ngrok &>/dev/null; then
   eval "$(ngrok completion)"
 fi
@@ -31,3 +28,16 @@ if command -v gcloud &>/dev/null; then
     source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
     source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
 fi
+ 
+export GPG_TTY="$(tty)"
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+gpgconf --launch gpg-agent
+gpg-connect-agent updatestartuptty /bye > /dev/null
+
+# DuckDB CLI
+[[ -d "$HOME/.duckdb/cli/latest" ]] && export PATH="$HOME/.duckdb/cli/latest:$PATH"
+
+# Bun completions
+[[ -s "$HOME/.bun/_bun" ]] && source "$HOME/.bun/_bun"
+# Try.rb (local script for managing try directories)
+[[ -f ~/.local/try.rb ]] && eval "$(ruby ~/.local/try.rb init ~/Developer/tries)"
