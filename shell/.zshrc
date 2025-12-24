@@ -3,13 +3,28 @@ source $HOMEBREW_PREFIX/opt/zinit/zinit.zsh
 
 # === OH-MY-ZSH SNIPPETS (turbo mode) ===
 zinit wait lucid for \
+    OMZP::brew \
     OMZP::bundler \
     OMZP::colored-man-pages \
+    OMZP::command-not-found \
     OMZP::common-aliases \
+    OMZP::copyfile \
+    OMZP::copypath \
+    OMZP::docker \
+    OMZP::docker-compose \
+    OMZP::extract \
     OMZP::fzf \
     OMZP::gem \
     OMZP::git \
-    OMZP::yarn
+    OMZP::gitignore \
+    OMZP::golang \
+    OMZP::jsontools \
+    OMZP::macos \
+    OMZP::pnpm \
+    OMZP::rust \
+    OMZP::safe-paste \
+    OMZP::sudo \
+    OMZP::universalarchive
 
 # Kubernetes (defer 1 second - not always needed immediately)
 zinit wait"1" lucid for \
