@@ -4,6 +4,10 @@
     signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBoDrobY6yVanyC6bncei3kseeYawWXwrdT+i+cSsAiz
 [color]
     ui = auto
+[log]
+    date = iso
+[status]
+    showStash = true
 [push]
     default = current
     autoSetupRemote = true
@@ -32,6 +36,7 @@
     process = git-lfs filter-process
 [commit]
     gpgsign = true
+    verbose = true
 [gpg]
     format = ssh
 [gpg "ssh"]
