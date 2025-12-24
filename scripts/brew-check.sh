@@ -3,25 +3,23 @@
 set -u
 
 DOTFILES="${DOTFILES:-$HOME/.dotfiles}"
+tmpdir=$(mktemp -d)
+trap 'rm -rf "$tmpdir"' EXIT
 
-# Combine all Brewfiles to check what's installed but not tracked
-combined=$(mktemp)
-cat "$DOTFILES/macos/Brewfile.core" "$DOTFILES/macos/Brewfile.apps" "$DOTFILES/macos/Brewfile.dev" "$DOTFILES/macos/Brewfile.vscode" > "$combined"
+# Run all checks in parallel
+cat "$DOTFILES/macos/Brewfile.core" "$DOTFILES/macos/Brewfile.apps" "$DOTFILES/macos/Brewfile.dev" "$DOTFILES/macos/Brewfile.vscode" > "$tmpdir/combined"
 
-# Get missing from configs (installed but not in ANY Brewfile)
-# Filter to just package names, not headers or cleanup suggestions
-missing_configs=$(brew bundle cleanup --file="$combined" 2>/dev/null | grep -v "^Would " | grep -v "^$" | grep -v "^=>" | grep -v "Would remove" | grep -v "^Run " | grep -v "operation would free" || true)
-rm -f "$combined"
+# Start all brew commands in parallel
+brew bundle cleanup --file="$tmpdir/combined" 2>/dev/null > "$tmpdir/cleanup" &
+brew bundle check --verbose --file="$DOTFILES/macos/Brewfile.core" 2>&1 > "$tmpdir/core" &
+brew bundle check --verbose --file="$DOTFILES/macos/Brewfile.apps" 2>&1 > "$tmpdir/apps" &
+brew bundle check --verbose --file="$DOTFILES/macos/Brewfile.dev" 2>&1 > "$tmpdir/dev" &
+brew bundle check --verbose --file="$DOTFILES/macos/Brewfile.vscode" 2>&1 > "$tmpdir/vscode" &
+wait
 
-# Collect all missing from system
-all_missing_system=""
-for name in core apps dev vscode; do
-    bf="$DOTFILES/macos/Brewfile.$name"
-    [ -f "$bf" ] || continue
-    result=$(brew bundle check --verbose --file="$bf" 2>&1 | grep "^→" | sed 's/^→ //' | sed 's/ needs to be.*//' || true)
-    [ -n "$result" ] && all_missing_system+="$result"$'\n'
-done
-missing_system=$(echo "$all_missing_system" | grep -v "^$" | sort -u || true)
+# Process results
+missing_configs=$(cat "$tmpdir/cleanup" | grep -v "^Would " | grep -v "^$" | grep -v "^=>" | grep -v "Would remove" | grep -v "^Run " | grep -v "operation would free" || true)
+missing_system=$(cat "$tmpdir/core" "$tmpdir/apps" "$tmpdir/dev" "$tmpdir/vscode" | grep "^→" | sed 's/^→ //' | sed 's/ needs to be.*//' | sort -u || true)
 
 # Count
 sys_count=0
