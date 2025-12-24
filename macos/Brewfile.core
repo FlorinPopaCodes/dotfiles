@@ -5,6 +5,7 @@ tap "homebrew/services"
 # Core utilities
 brew "coreutils"
 brew "stow"
+brew "just"
 brew "wget"
 brew "jq"
 brew "htop"
