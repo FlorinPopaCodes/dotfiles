@@ -8,6 +8,7 @@ Personal dotfiles managed with [GNU Stow](https://www.gnu.org/software/stow/) an
 ~/.dotfiles/
 ├── shell/          # zsh, zinit configs
 ├── git/            # gitconfig, gitignore
+├── ssh/            # SSH config with 1Password agent
 ├── starship/       # Starship prompt config
 ├── terminal/
 │   └── ghostty/    # Ghostty terminal config
@@ -66,7 +67,8 @@ just info         # Show environment info
 | Module | Description |
 |--------|-------------|
 | `shell` | zsh config, zinit plugins, aliases |
-| `git` | git config with delta, GPG signing via 1Password |
+| `git` | git config with delta, commit signing via 1Password SSH |
+| `ssh` | SSH config with 1Password SSH agent |
 | `starship` | Custom prompt with git status and time |
 | `terminal/ghostty` | Ghostty terminal config with Solarized Light theme |
 
