@@ -4,12 +4,36 @@
     signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBoDrobY6yVanyC6bncei3kseeYawWXwrdT+i+cSsAiz
 [color]
     ui = auto
+[log]
+    date = iso
+[status]
+    showStash = true
 [push]
     default = current
+    autoSetupRemote = true
+    followTags = true
+[fetch]
+    prune = true
+    pruneTags = true
+    fsckobjects = true
+[transfer]
+    fsckobjects = true
+[receive]
+    fsckObjects = true
+[pull]
+    rebase = true
+[rebase]
+    autoStash = true
+    autoSquash = true
+    updateRefs = true
+    missingCommitsCheck = error
+[rerere]
+    enabled = true
+[init]
+    defaultBranch = main
 [core]
     pager = delta
     excludesfile = ~/.gitignore_global
-    mergeoptions = --no-edit
     hooksPath = ~/.git-hooks
 [filter "lfs"]
     clean = git-lfs clean -- %f
@@ -17,6 +41,7 @@
     process = git-lfs filter-process
 [commit]
     gpgsign = true
+    verbose = true
 [gpg]
     format = ssh
 [gpg "ssh"]
@@ -28,9 +53,17 @@
 [delta]
     navigate = true    # use n and N to move between diff sections
 [merge]
-    conflictstyle = diff3
+    conflictstyle = zdiff3
 [diff]
     colorMoved = default
+    algorithm = histogram
+[branch]
+    sort = -committerdate
+    autoSetupMerge = simple
+[tag]
+    sort = -version:refname
+[help]
+    autocorrect = prompt
 [gitbutler]
 	aiModelProvider = anthropic
 	aiAnthropicKeyOption = butlerAPI
