@@ -10,7 +10,6 @@ Personal dotfiles managed with [GNU Stow](https://www.gnu.org/software/stow/) an
 ├── git/            # gitconfig, gitignore
 ├── starship/       # Starship prompt config
 ├── terminal/
-│   ├── kitty/      # Kitty terminal config
 │   └── ghostty/    # Ghostty terminal config
 ├── macos/          # macOS-specific
 │   ├── Brewfile.core   # Essential CLI tools
@@ -63,8 +62,7 @@ just info         # Show environment info
 | `shell` | zsh config, zinit plugins, aliases |
 | `git` | git config with delta, GPG signing via 1Password |
 | `starship` | Custom prompt with git status and time |
-| `terminal/kitty` | Kitty config with Solarized Light theme |
-| `terminal/ghostty` | Ghostty config matching kitty theme |
+| `terminal/ghostty` | Ghostty terminal config with Solarized Light theme |
 
 ## Local Overrides
 

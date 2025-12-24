@@ -5,7 +5,7 @@
 font-family = "Fira Code"
 font-size = 14
 
-# Theme: Solarized Light (matching kitty)
+# Theme: Solarized Light
 background = fdf6e3
 foreground = 52676f
 cursor-color = 52676f
