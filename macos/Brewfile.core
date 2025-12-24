@@ -20,6 +20,7 @@ brew "zinit"
 brew "starship"
 brew "thefuck"
 brew "direnv"
+brew "zoxide"
 
 # Editor
 brew "neovim"

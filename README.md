@@ -14,7 +14,9 @@ Personal dotfiles managed with [GNU Stow](https://www.gnu.org/software/stow/) an
 ├── macos/          # macOS-specific
 │   ├── Brewfile.core   # Essential CLI tools
 │   ├── Brewfile.apps   # GUI applications
-│   └── Brewfile.dev    # Development tools
+│   ├── Brewfile.dev    # Development tools
+│   ├── Brewfile.vscode # VS Code extensions
+│   └── .macos          # macOS system defaults
 ├── arch/           # Arch Linux packages (TODO)
 ├── scripts/        # Custom scripts
 └── justfile        # Automation recipes
@@ -48,7 +50,11 @@ just check        # Dry-run, check for conflicts
 just brew-core    # Install essential CLI tools
 just brew-apps    # Install GUI applications
 just brew-dev     # Install development tools
+just brew-vscode  # Install VS Code extensions
 just brew-all     # Install everything
+
+# macOS system defaults
+just macos-defaults  # Apply developer-focused macOS settings
 
 # Info
 just status       # Show symlink and git status
@@ -87,14 +93,15 @@ cp shell/.zshrc.local.example ~/.zshrc.local
 
 | File | Contents |
 |------|----------|
-| `Brewfile.core` | stow, just, neovim, starship, fzf, ripgrep, git-delta |
-| `Brewfile.apps` | 1Password, Arc, Slack, Obsidian, Raycast, Ghostty |
-| `Brewfile.dev` | node, rust, ruby, docker, postgres, various CLI tools |
+| `Brewfile.core` | stow, just, neovim, starship, fzf, ripgrep, zoxide, git-delta |
+| `Brewfile.apps` | 1Password, Arc, Obsidian, Raycast, Ghostty |
+| `Brewfile.dev` | node, rust, ruby, docker, various CLI tools |
+| `Brewfile.vscode` | VS Code extensions for development |
 
 ## TODO
 
 - [ ] Arch Linux package lists
-- [ ] macOS defaults script (`.macos`)
+- [x] macOS defaults script (`.macos`)
 - [ ] neovim config
 - [ ] Shell startup optimization (lazy loading)
 

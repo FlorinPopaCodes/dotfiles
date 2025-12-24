@@ -1,0 +1,68 @@
+# VS Code extensions
+# Install with: just brew-vscode
+
+# Project management
+vscode "alefragnani.project-manager"
+
+# AI assistants
+vscode "anthropic.claude-code"
+vscode "github.copilot"
+vscode "github.copilot-chat"
+vscode "supermaven.supermaven"
+vscode "saoudrizwan.claude-dev"
+
+# Markdown
+vscode "bierner.github-markdown-preview"
+vscode "bierner.markdown-checkbox"
+vscode "bierner.markdown-emoji"
+vscode "bierner.markdown-footnotes"
+vscode "bierner.markdown-mermaid"
+vscode "bierner.markdown-preview-github-styles"
+vscode "bierner.markdown-yaml-preamble"
+
+# Git
+vscode "codezombiech.gitignore"
+vscode "donjayamanne.git-extension-pack"
+vscode "donjayamanne.githistory"
+vscode "eamodio.gitlens"
+vscode "ziyasal.vscode-open-in-github"
+
+# Web development
+vscode "bradlc.vscode-tailwindcss"
+vscode "dbaeumer.vscode-eslint"
+vscode "mgmcdermott.vscode-language-babel"
+
+# Ruby
+vscode "castwide.solargraph"
+vscode "rebornix.ruby"
+vscode "shopify.ruby-lsp"
+vscode "wingrunr21.vscode-ruby"
+
+# Python
+vscode "ms-python.debugpy"
+vscode "ms-python.isort"
+vscode "ms-python.python"
+vscode "ms-python.vscode-pylance"
+vscode "ms-python.vscode-python-envs"
+
+# Docker & containers
+vscode "ms-azuretools.vscode-containers"
+vscode "ms-azuretools.vscode-docker"
+vscode "ms-vscode-remote.remote-containers"
+
+# Azure
+vscode "ms-azuretools.vscode-azureresourcegroups"
+vscode "ms-vscode.azure-account"
+
+# Collaboration
+vscode "ms-vsliveshare.vsliveshare"
+
+# Other languages
+vscode "juanblanco.solidity"
+vscode "redhat.vscode-yaml"
+
+# Utilities
+vscode "editorconfig.editorconfig"
+vscode "mechatroner.rainbow-csv"
+vscode "streetsidesoftware.code-spell-checker"
+vscode "tldraw-org.tldraw-vscode"

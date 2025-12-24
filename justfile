@@ -81,6 +81,9 @@ brew-check: _ensure-macos _ensure-brew
     echo ""
     echo "=== Dev tools ==="
     brew bundle check --file={{dotfiles}}/macos/Brewfile.dev || failed=1
+    echo ""
+    echo "=== VS Code extensions ==="
+    brew bundle check --file={{dotfiles}}/macos/Brewfile.vscode || failed=1
     exit $failed
 
 # Dump current brew packages to Brewfiles

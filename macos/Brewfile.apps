@@ -16,9 +16,9 @@ cask "todoist-app"
 cask "anki"
 
 # Communication
-cask "slack"
 cask "discord"
 cask "zoom"
+# Note: Slack installed via Mac App Store (see mas entries below)
 
 # Media
 cask "spotify"

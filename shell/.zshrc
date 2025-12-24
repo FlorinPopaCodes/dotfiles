@@ -31,6 +31,7 @@ if command -v ngrok &>/dev/null; then
   eval "$(ngrok completion)"
 fi
 eval $(thefuck --alias f)
+eval "$(zoxide init zsh --cmd j)"
 
 alias rm="trash"
 
@@ -50,7 +51,7 @@ if command -v gcloud &>/dev/null; then
     source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
     source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
 fi
- 
+
 export GPG_TTY="$(tty)"
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
