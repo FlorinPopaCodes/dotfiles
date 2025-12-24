@@ -1,69 +1,82 @@
-# Zinit plugin manager
+# === ZINIT SETUP ===
 source $HOMEBREW_PREFIX/opt/zinit/zinit.zsh
 
-# Oh-my-zsh plugins (as snippets)
-zinit snippet OMZP::bundler
-zinit snippet OMZP::colored-man-pages
-zinit snippet OMZP::common-aliases
-zinit snippet OMZP::fzf
-zinit snippet OMZP::gem
-zinit snippet OMZP::git
-zinit snippet OMZP::kube-ps1
-zinit snippet OMZP::kubectl
-zinit snippet OMZP::yarn
+# === OH-MY-ZSH SNIPPETS (turbo mode) ===
+zinit wait lucid for \
+    OMZP::bundler \
+    OMZP::colored-man-pages \
+    OMZP::common-aliases \
+    OMZP::fzf \
+    OMZP::gem \
+    OMZP::git \
+    OMZP::yarn
 
-# External plugins
-zinit light romkatv/zsh-defer
+# Kubernetes (defer 1 second - not always needed immediately)
+zinit wait"1" lucid for \
+    OMZP::kube-ps1 \
+    OMZP::kubectl
 
-# Completions (with blockf to prevent conflicts)
-zinit ice blockf
-zinit light zsh-users/zsh-completions
-autoload -Uz compinit && compinit
+# === COMPLETIONS (turbo mode) ===
+zinit wait lucid for \
+    blockf \
+    atload"zicompinit; zicdreplay" \
+  zsh-users/zsh-completions
 
-# Syntax highlighting MUST be loaded last
-zinit light zsh-users/zsh-syntax-highlighting
+# === SYNTAX HIGHLIGHTING (must load after completions) ===
+zinit wait"0b" lucid for \
+  zsh-users/zsh-syntax-highlighting
 
+# === IMMEDIATE TOOLS (must run before prompt) ===
 eval "$(starship init zsh)"
-eval "$(direnv hook zsh)"
-eval "$(rbenv init - zsh)" # Slow
-eval "$(fzf --zsh)"
+
+# === DEFERRED TOOLS (turbo mode - run after prompt) ===
+zinit wait lucid for \
+    atload'eval "$(direnv hook zsh)"' \
+  zdharma-continuum/null
+
+zinit wait lucid for \
+    atload'eval "$(rbenv init - zsh)"' \
+  zdharma-continuum/null
+
+zinit wait lucid for \
+    atload'eval "$(fzf --zsh)"' \
+  zdharma-continuum/null
+
+zinit wait lucid for \
+    atload'eval $(thefuck --alias f)' \
+  zdharma-continuum/null
+
+zinit wait lucid for \
+    atload'eval "$(zoxide init zsh --cmd j)"' \
+  zdharma-continuum/null
+
+# === CONDITIONAL DEFERRED TOOLS ===
 if command -v ngrok &>/dev/null; then
-  eval "$(ngrok completion)"
+    zinit wait lucid for atload'eval "$(ngrok completion)"' zdharma-continuum/null
 fi
-eval $(thefuck --alias f)
-eval "$(zoxide init zsh --cmd j)"
-
-alias rm="trash"
-
-export EDITOR="nvim"
-export HOMEBREW_NO_AUTO_UPDATE=1
-
-# fpath=(~/.stripe $fpath)
-
-# Slow
-# if type brew &>/dev/null; then
-#     FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-#     autoload -Uz compinit
-#     compinit
-# fi
 
 if command -v gcloud &>/dev/null; then
     source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
     source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
 fi
 
+# === ALIASES ===
+alias rm="trash"
+
+# === ENVIRONMENT ===
+export EDITOR="nvim"
+export HOMEBREW_NO_AUTO_UPDATE=1
+
+# === GPG/SSH AGENT ===
 export GPG_TTY="$(tty)"
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
 gpg-connect-agent updatestartuptty /bye > /dev/null
 
-# DuckDB CLI
+# === CONDITIONAL PATHS ===
 [[ -d "$HOME/.duckdb/cli/latest" ]] && export PATH="$HOME/.duckdb/cli/latest:$PATH"
-
-# Bun completions
 [[ -s "$HOME/.bun/_bun" ]] && source "$HOME/.bun/_bun"
-# Try.rb (local script for managing try directories)
 [[ -f ~/.local/try.rb ]] && eval "$(ruby ~/.local/try.rb init ~/Developer/tries)"
 
-# Local overrides (not tracked by git)
+# === LOCAL OVERRIDES ===
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
