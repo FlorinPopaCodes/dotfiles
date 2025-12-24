@@ -13,19 +13,19 @@ default:
 
 # === STOW OPERATIONS ===
 
-# Stow all core modules (shell, git)
+# Stow all core modules (shell, git, starship)
 stow: _ensure-stow
     @echo "Stowing core modules..."
-    cd {{dotfiles}} && stow --verbose shell git
+    cd {{dotfiles}} && stow --verbose shell git starship
     @echo "Stowing terminal configs..."
-    cd {{dotfiles}}/terminal && stow --verbose --target={{home}} kitty
+    cd {{dotfiles}}/terminal && stow --verbose --target={{home}} kitty ghostty
     @echo "Done!"
 
 # Unstow all modules
 unstow:
     @echo "Unstowing all modules..."
-    cd {{dotfiles}} && stow --verbose --delete shell git || true
-    cd {{dotfiles}}/terminal && stow --verbose --delete --target={{home}} kitty || true
+    cd {{dotfiles}} && stow --verbose --delete shell git starship || true
+    cd {{dotfiles}}/terminal && stow --verbose --delete --target={{home}} kitty ghostty || true
     @echo "Done!"
 
 # Restow (unstow + stow) - useful after updates
@@ -34,14 +34,14 @@ restow: unstow stow
 # Dry-run stow to check for conflicts
 check:
     @echo "Checking for stow conflicts..."
-    cd {{dotfiles}} && stow --verbose --simulate shell git
-    cd {{dotfiles}}/terminal && stow --verbose --simulate --target={{home}} kitty
+    cd {{dotfiles}} && stow --verbose --simulate shell git starship
+    cd {{dotfiles}}/terminal && stow --verbose --simulate --target={{home}} kitty ghostty
 
 # Adopt existing files into dotfiles (overwrites dotfiles with existing)
 adopt:
     @echo "Adopting existing files..."
-    cd {{dotfiles}} && stow --verbose --adopt shell git
-    cd {{dotfiles}}/terminal && stow --verbose --adopt --target={{home}} kitty
+    cd {{dotfiles}} && stow --verbose --adopt shell git starship
+    cd {{dotfiles}}/terminal && stow --verbose --adopt --target={{home}} kitty ghostty
 
 # === BREW OPERATIONS (macOS only) ===
 
@@ -143,7 +143,7 @@ _ensure-arch:
 # Show current stow status
 status:
     @echo "=== Symlink Status ==="
-    @ls -la {{home}}/.zshrc {{home}}/.gitconfig {{home}}/.config/kitty/kitty.conf 2>/dev/null || echo "Some links missing"
+    @ls -la {{home}}/.zshrc {{home}}/.gitconfig {{home}}/.config/kitty/kitty.conf {{home}}/.config/starship.toml {{home}}/.config/ghostty 2>/dev/null || echo "Some links missing"
     @echo "\n=== Git Status ==="
     @cd {{dotfiles}} && git status --short
 

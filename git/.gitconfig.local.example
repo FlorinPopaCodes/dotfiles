@@ -1,0 +1,14 @@
+# Local git configuration (not tracked by git)
+# Copy to ~/.gitconfig.local and customize
+
+# Example: Work email
+# [user]
+#     email = florin@work-company.com
+
+# Example: Different signing key for work
+# [user]
+#     signingkey = ssh-ed25519 WORK_KEY_HERE
+
+# Example: Work-specific aliases
+# [alias]
+#     deploy = !./scripts/deploy.sh

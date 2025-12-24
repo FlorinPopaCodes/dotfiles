@@ -1,0 +1,53 @@
+# Ghostty terminal configuration
+# Docs: https://ghostty.org/docs/config
+
+# Font
+font-family = "Fira Code"
+font-size = 14
+
+# Theme: Solarized Light (matching kitty)
+background = fdf6e3
+foreground = 52676f
+cursor-color = 52676f
+selection-background = e9e2cb
+selection-foreground = fcf4dc
+
+# Solarized colors
+palette = 0=#e4e4e4
+palette = 1=#d70000
+palette = 2=#5f8700
+palette = 3=#af8700
+palette = 4=#0087ff
+palette = 5=#af005f
+palette = 6=#00afaf
+palette = 7=#262626
+palette = 8=#ffffd7
+palette = 9=#d75f00
+palette = 10=#585858
+palette = 11=#626262
+palette = 12=#808080
+palette = 13=#5f5faf
+palette = 14=#8a8a8a
+palette = 15=#1c1c1c
+
+# Window
+window-padding-x = 8
+window-padding-y = 8
+window-decoration = true
+macos-titlebar-style = native
+
+# Behavior
+confirm-close-surface = false
+copy-on-select = false
+mouse-hide-while-typing = true
+
+# Shell integration
+shell-integration = zsh
+shell-integration-features = cursor,sudo,title
+
+# Scrollback
+scrollback-limit = 10000
+
+# Keybindings (use defaults, add custom ones here)
+# keybind = super+t=new_tab
+# keybind = super+n=new_window

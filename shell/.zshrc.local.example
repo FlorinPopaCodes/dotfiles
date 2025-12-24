@@ -1,0 +1,16 @@
+# Local zsh configuration (not tracked by git)
+# Copy to ~/.zshrc.local and customize
+
+# Example: Work-specific paths
+# export PATH="/opt/work-tools/bin:$PATH"
+
+# Example: Work aliases
+# alias vpn="work-vpn-connect"
+# alias k="kubectl --context=work-cluster"
+
+# Example: Work environment variables
+# export WORK_API_KEY="xxx"
+# export AWS_PROFILE="work"
+
+# Example: Machine-specific settings
+# export JAVA_HOME="/usr/local/opt/openjdk@17"

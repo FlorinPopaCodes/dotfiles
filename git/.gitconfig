@@ -33,3 +33,7 @@
 [gitbutler]
 	aiModelProvider = anthropic
 	aiAnthropicKeyOption = butlerAPI
+
+# Include local overrides (not tracked by git)
+[include]
+    path = ~/.gitconfig.local

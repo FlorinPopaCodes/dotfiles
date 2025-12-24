@@ -41,3 +41,6 @@ gpg-connect-agent updatestartuptty /bye > /dev/null
 [[ -s "$HOME/.bun/_bun" ]] && source "$HOME/.bun/_bun"
 # Try.rb (local script for managing try directories)
 [[ -f ~/.local/try.rb ]] && eval "$(ruby ~/.local/try.rb init ~/Developer/tries)"
+
+# Local overrides (not tracked by git)
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
