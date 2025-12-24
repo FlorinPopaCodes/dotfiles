@@ -68,23 +68,9 @@ brew-vscode: _ensure-macos _ensure-brew
 # Install all brew packages
 brew-all: brew-core brew-apps brew-dev brew-vscode
 
-# Check what would be installed (shows all, fails if any missing)
+# Check brew sync: shows missing from configs and missing from system
 brew-check: _ensure-macos _ensure-brew
-    #!/usr/bin/env bash
-    set -u
-    failed=0
-    echo "=== Core packages ==="
-    brew bundle check --file={{dotfiles}}/macos/Brewfile.core || failed=1
-    echo ""
-    echo "=== GUI apps ==="
-    brew bundle check --file={{dotfiles}}/macos/Brewfile.apps || failed=1
-    echo ""
-    echo "=== Dev tools ==="
-    brew bundle check --file={{dotfiles}}/macos/Brewfile.dev || failed=1
-    echo ""
-    echo "=== VS Code extensions ==="
-    brew bundle check --file={{dotfiles}}/macos/Brewfile.vscode || failed=1
-    exit $failed
+    @DOTFILES={{dotfiles}} {{dotfiles}}/scripts/brew-check.sh
 
 # Dump current brew packages to Brewfiles
 brew-dump: _ensure-macos _ensure-brew
