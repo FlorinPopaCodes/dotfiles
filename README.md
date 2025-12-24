@@ -103,7 +103,7 @@ cp shell/.zshrc.local.example ~/.zshrc.local
 - [ ] Arch Linux package lists
 - [x] macOS defaults script (`.macos`)
 - [ ] neovim config
-- [ ] Shell startup optimization (lazy loading)
+- [x] Shell startup optimization (zinit turbo mode)
 
 ## Thanks
 
