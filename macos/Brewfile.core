@@ -35,19 +35,13 @@ brew "git-lfs"
 brew "lefthook"
 
 # Security
-# TODO: replace with 1pass ssh key and gpg signing
 brew "gitleaks"
-brew "gnupg"
-brew "gpgme"
-brew "pinentry-mac"
-brew "hopenpgp-tools"
-brew "ykman"
 
 # Essentials
-brew "macos-trash", link: true
+brew "gtrash"
 brew "mas"
 brew "mosh"
-brew "pam-reattach"
+brew "pam-reattach" # TODO: do I need this?
 
 # Fonts
 cask "font-fira-code"

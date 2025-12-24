@@ -104,11 +104,8 @@ export EDITOR="nvim"
 export HOMEBREW_NO_AUTO_UPDATE=1
 export BAT_THEME="gruvbox-dark"
 
-# === GPG/SSH AGENT ===
-export GPG_TTY="$(tty)"
-export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-gpgconf --launch gpg-agent
-gpg-connect-agent updatestartuptty /bye > /dev/null
+# === 1PASSWORD SSH AGENT ===
+export SSH_AUTH_SOCK="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
 
 # === CONDITIONAL PATHS ===
 [[ -d "$HOME/.duckdb/cli/latest" ]] && export PATH="$HOME/.duckdb/cli/latest:$PATH"
