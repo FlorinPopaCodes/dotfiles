@@ -19,8 +19,6 @@ zinit wait lucid for \
     OMZP::gitignore \
     OMZP::golang \
     OMZP::jsontools \
-    OMZP::macos \
-    OMZP::pnpm \
     OMZP::rust \
     OMZP::safe-paste \
     OMZP::sudo \
@@ -66,6 +64,10 @@ zinit wait lucid for \
   zdharma-continuum/null
 
 # === CONDITIONAL DEFERRED TOOLS ===
+if command -v pnpm &>/dev/null; then
+    zinit wait lucid for atload'eval "$(pnpm completion zsh)"' zdharma-continuum/null
+fi
+
 if command -v ngrok &>/dev/null; then
     zinit wait lucid for atload'eval "$(ngrok completion)"' zdharma-continuum/null
 fi
