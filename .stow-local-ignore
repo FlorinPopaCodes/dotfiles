@@ -16,3 +16,4 @@ Makefile
 ^scripts$
 ^editors$
 ^starship$
+^claude$

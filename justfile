@@ -13,10 +13,10 @@ default:
 
 # === STOW OPERATIONS ===
 
-# Stow all core modules (shell, git, starship)
+# Stow all core modules (shell, git, starship, claude)
 stow: _ensure-stow
     @echo "Stowing core modules..."
-    cd {{dotfiles}} && stow --verbose shell git starship
+    cd {{dotfiles}} && stow --verbose shell git starship claude
     @echo "Stowing terminal configs..."
     cd {{dotfiles}}/terminal && stow --verbose --target={{home}} ghostty
     @echo "Done!"
@@ -24,7 +24,7 @@ stow: _ensure-stow
 # Unstow all modules
 unstow:
     @echo "Unstowing all modules..."
-    cd {{dotfiles}} && stow --verbose --delete shell git starship || true
+    cd {{dotfiles}} && stow --verbose --delete shell git starship claude || true
     cd {{dotfiles}}/terminal && stow --verbose --delete --target={{home}} ghostty || true
     @echo "Done!"
 
@@ -34,13 +34,13 @@ restow: unstow stow
 # Dry-run stow to check for conflicts
 check:
     @echo "Checking for stow conflicts..."
-    cd {{dotfiles}} && stow --verbose --simulate shell git starship
+    cd {{dotfiles}} && stow --verbose --simulate shell git starship claude
     cd {{dotfiles}}/terminal && stow --verbose --simulate --target={{home}} ghostty
 
 # Adopt existing files into dotfiles (overwrites dotfiles with existing)
 adopt:
     @echo "Adopting existing files..."
-    cd {{dotfiles}} && stow --verbose --adopt shell git starship
+    cd {{dotfiles}} && stow --verbose --adopt shell git starship claude
     cd {{dotfiles}}/terminal && stow --verbose --adopt --target={{home}} ghostty
 
 # === BREW OPERATIONS (macOS only) ===
@@ -157,7 +157,7 @@ _ensure-arch:
 # Show current stow status
 status:
     @echo "=== Symlink Status ==="
-    @ls -la {{home}}/.zshrc {{home}}/.gitconfig {{home}}/.config/starship.toml {{home}}/.config/ghostty 2>/dev/null || echo "Some links missing"
+    @ls -la {{home}}/.zshrc {{home}}/.gitconfig {{home}}/.config/starship.toml {{home}}/.config/ghostty {{home}}/.claude/settings.json 2>/dev/null || echo "Some links missing"
     @echo ""
     @echo "=== Git Status ==="
     @cd {{dotfiles}} && git status --short

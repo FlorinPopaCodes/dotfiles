@@ -1,0 +1,14 @@
+{
+  "// Machine-specific Claude settings (not tracked by git)": "",
+  "// Copy to ~/.claude/settings.local.json and customize": "",
+
+  "// Example: Override plugins for this machine": "",
+  "enabledPlugins": {
+    "plugin-name@marketplace": true
+  },
+
+  "// Example: Machine-specific hooks": "",
+  "hooks": {
+    "SessionStart": []
+  }
+}
