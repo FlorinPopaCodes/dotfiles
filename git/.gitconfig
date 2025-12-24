@@ -15,6 +15,11 @@
 [fetch]
     prune = true
     pruneTags = true
+    fsckobjects = true
+[transfer]
+    fsckobjects = true
+[receive]
+    fsckObjects = true
 [pull]
     rebase = true
 [rebase]
