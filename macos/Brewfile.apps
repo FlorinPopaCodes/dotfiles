@@ -1,0 +1,66 @@
+# GUI applications
+tap "buo/cask-upgrade"
+
+# Browsers
+cask "arc"
+cask "firefox"
+cask "google-chrome"
+
+# Productivity
+cask "1password"
+cask "1password-cli"
+cask "raycast"
+cask "rectangle"
+cask "cheatsheet"
+cask "obsidian"
+cask "notion"
+cask "todoist-app"
+cask "grammarly-desktop"
+cask "anki"
+
+# Communication
+cask "slack"
+cask "discord"
+cask "beeper"
+cask "zoom"
+
+# Media
+cask "spotify"
+cask "vlc"
+cask "transmission"
+
+# Terminals
+cask "ghostty"
+
+# Dev tools (GUI)
+cask "cursor"
+cask "visual-studio-code"
+cask "zed"
+cask "gitbutler"
+cask "jetbrains-toolbox"
+cask "postman"
+cask "dash"
+cask "devutils"
+cask "db-browser-for-sqlite"
+
+# Utilities
+cask "adobe-acrobat-reader"
+cask "arq"
+cask "betterdisplay"
+cask "camo-studio"
+cask "dropbox"
+cask "kopiaui"
+cask "xquartz"
+
+# Hardware
+cask "wacom-tablet"
+cask "qmk-toolbox"
+cask "prusaslicer"
+cask "autodesk-fusion"
+
+# Mac App Store
+mas "1Password for Safari", id: 1569813296
+mas "Final Cut Pro", id: 424389933
+mas "keymapp", id: 6472865291
+mas "reMarkable", id: 1276493162
+mas "Tailscale", id: 1475387142

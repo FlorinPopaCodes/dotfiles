@@ -1,0 +1,18 @@
+# Global stow ignore file
+\.git
+\.gitignore
+\.stow-local-ignore
+README\.md
+LICENSE
+justfile
+Makefile
+
+# Directories that should not be stowed from root
+^shell$
+^git$
+^terminal$
+^macos$
+^arch$
+^scripts$
+^editors$
+^starship$

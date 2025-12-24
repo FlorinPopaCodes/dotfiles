@@ -1,0 +1,48 @@
+# Essential CLI tools - always installed
+tap "homebrew/bundle"
+tap "homebrew/services"
+
+# Core utilities
+brew "coreutils"
+brew "stow"
+brew "wget"
+brew "jq"
+brew "htop"
+brew "tldr"
+brew "ripgrep"
+brew "the_silver_searcher"
+brew "fzf"
+
+# Shell
+brew "antigen"
+brew "starship"
+brew "thefuck"
+brew "direnv"
+
+# Editor
+brew "neovim"
+
+# Git
+brew "gh"
+brew "git-delta"
+brew "git-absorb"
+brew "git-lfs"
+brew "lefthook"
+
+# Security
+brew "gnupg"
+brew "gpgme"
+brew "pinentry-mac"
+brew "hopenpgp-tools"
+brew "ykman"
+brew "ykpers"
+
+# Essentials
+brew "macos-trash", link: true
+brew "mas"
+brew "mosh"
+brew "pam-reattach"
+
+# Fonts
+cask "font-fira-code"
+cask "font-hack-nerd-font"
