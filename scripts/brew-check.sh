@@ -7,19 +7,18 @@ tmpdir=$(mktemp -d)
 trap 'rm -rf "$tmpdir"' EXIT
 
 # Run all checks in parallel
-cat "$DOTFILES/macos/Brewfile.core" "$DOTFILES/macos/Brewfile.apps" "$DOTFILES/macos/Brewfile.dev" "$DOTFILES/macos/Brewfile.vscode" > "$tmpdir/combined"
+cat "$DOTFILES/macos/Brewfile.core" "$DOTFILES/macos/Brewfile.apps" "$DOTFILES/macos/Brewfile.dev" > "$tmpdir/combined"
 
 # Start all brew commands in parallel
 brew bundle cleanup --file="$tmpdir/combined" 2>/dev/null > "$tmpdir/cleanup" &
 brew bundle check --verbose --file="$DOTFILES/macos/Brewfile.core" 2>&1 > "$tmpdir/core" &
 brew bundle check --verbose --file="$DOTFILES/macos/Brewfile.apps" 2>&1 > "$tmpdir/apps" &
 brew bundle check --verbose --file="$DOTFILES/macos/Brewfile.dev" 2>&1 > "$tmpdir/dev" &
-brew bundle check --verbose --file="$DOTFILES/macos/Brewfile.vscode" 2>&1 > "$tmpdir/vscode" &
 wait
 
 # Process results
 missing_configs=$(cat "$tmpdir/cleanup" | grep -v "^Would " | grep -v "^$" | grep -v "^=>" | grep -v "Would remove" | grep -v "^Run " | grep -v "operation would free" || true)
-missing_system=$(cat "$tmpdir/core" "$tmpdir/apps" "$tmpdir/dev" "$tmpdir/vscode" | grep "^→" | sed 's/^→ //' | sed 's/ needs to be.*//' | sort -u || true)
+missing_system=$(cat "$tmpdir/core" "$tmpdir/apps" "$tmpdir/dev" | grep "^→" | sed 's/^→ //' | sed 's/ needs to be.*//' | sort -u || true)
 
 # Count
 sys_count=0

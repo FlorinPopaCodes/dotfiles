@@ -1,7 +1,7 @@
 # Dotfiles management with just
 # Usage: just <recipe>
 
-set dotenv-load
+set dotenv-load := true
 set shell := ["bash", "-cu"]
 
 home := env_var("HOME")
@@ -16,16 +16,16 @@ default:
 # Stow all core modules (shell, git, starship, claude)
 stow: _ensure-stow
     @echo "Stowing core modules..."
-    cd {{dotfiles}} && stow --verbose shell git starship claude ssh
+    cd {{ dotfiles }} && stow --verbose shell git starship claude ssh
     @echo "Stowing terminal configs..."
-    cd {{dotfiles}}/terminal && stow --verbose --target={{home}} ghostty
+    cd {{ dotfiles }}/terminal && stow --verbose --target={{ home }} ghostty
     @echo "Done!"
 
 # Unstow all modules
 unstow:
     @echo "Unstowing all modules..."
-    cd {{dotfiles}} && stow --verbose --delete shell git starship claude ssh || true
-    cd {{dotfiles}}/terminal && stow --verbose --delete --target={{home}} ghostty || true
+    cd {{ dotfiles }} && stow --verbose --delete shell git starship claude ssh || true
+    cd {{ dotfiles }}/terminal && stow --verbose --delete --target={{ home }} ghostty || true
     @echo "Done!"
 
 # Restow (unstow + stow) - useful after updates
@@ -34,48 +34,43 @@ restow: unstow stow
 # Dry-run stow to check for conflicts
 check:
     @echo "Checking for stow conflicts..."
-    cd {{dotfiles}} && stow --verbose --simulate shell git starship claude ssh
-    cd {{dotfiles}}/terminal && stow --verbose --simulate --target={{home}} ghostty
+    cd {{ dotfiles }} && stow --verbose --simulate shell git starship claude ssh
+    cd {{ dotfiles }}/terminal && stow --verbose --simulate --target={{ home }} ghostty
 
 # Adopt existing files into dotfiles (overwrites dotfiles with existing)
 adopt:
     @echo "Adopting existing files..."
-    cd {{dotfiles}} && stow --verbose --adopt shell git starship claude ssh
-    cd {{dotfiles}}/terminal && stow --verbose --adopt --target={{home}} ghostty
+    cd {{ dotfiles }} && stow --verbose --adopt shell git starship claude ssh
+    cd {{ dotfiles }}/terminal && stow --verbose --adopt --target={{ home }} ghostty
 
 # === BREW OPERATIONS (macOS only) ===
 
 # Install core CLI tools
 brew-core: _ensure-macos _ensure-brew
     @echo "Installing core packages..."
-    brew bundle install --file={{dotfiles}}/macos/Brewfile.core
+    brew bundle install --file={{ dotfiles }}/macos/Brewfile.core
 
 # Install GUI apps
 brew-apps: _ensure-macos _ensure-brew
     @echo "Installing GUI apps..."
-    brew bundle install --file={{dotfiles}}/macos/Brewfile.apps
+    brew bundle install --file={{ dotfiles }}/macos/Brewfile.apps
 
 # Install dev tools
 brew-dev: _ensure-macos _ensure-brew
     @echo "Installing dev tools..."
-    brew bundle install --file={{dotfiles}}/macos/Brewfile.dev
-
-# Install VS Code extensions
-brew-vscode: _ensure-macos _ensure-brew
-    @echo "Installing VS Code extensions..."
-    brew bundle install --file={{dotfiles}}/macos/Brewfile.vscode
+    brew bundle install --file={{ dotfiles }}/macos/Brewfile.dev
 
 # Install all brew packages
-brew-all: brew-core brew-apps brew-dev brew-vscode
+brew-all: brew-core brew-apps brew-dev
 
 # Check brew sync: shows missing from configs and missing from system
 brew-check: _ensure-macos _ensure-brew
-    @DOTFILES={{dotfiles}} {{dotfiles}}/scripts/brew-check.sh
+    @DOTFILES={{ dotfiles }} {{ dotfiles }}/scripts/brew-check.sh
 
 # Dump current brew packages to Brewfiles
 brew-dump: _ensure-macos _ensure-brew
     @echo "Dumping brew packages (backup before running)..."
-    brew bundle dump --force --file={{dotfiles}}/macos/Brewfile.dump
+    brew bundle dump --force --file={{ dotfiles }}/macos/Brewfile.dump
     @echo "Dumped to macos/Brewfile.dump"
 
 # === MACOS DEFAULTS ===
@@ -83,8 +78,8 @@ brew-dump: _ensure-macos _ensure-brew
 # Apply macOS system defaults (creates .macos if missing)
 macos-defaults: _ensure-macos
     @echo "Applying macOS defaults..."
-    @if [ -f {{dotfiles}}/macos/.macos ]; then \
-        bash {{dotfiles}}/macos/.macos; \
+    @if [ -f {{ dotfiles }}/macos/.macos ]; then \
+        bash {{ dotfiles }}/macos/.macos; \
     else \
         echo "No .macos script found. Create one at macos/.macos"; \
     fi
@@ -94,13 +89,13 @@ macos-defaults: _ensure-macos
 # Install packages on Arch Linux
 arch-install: _ensure-arch
     @echo "Installing Arch packages..."
-    @if [ -f {{dotfiles}}/arch/packages.txt ]; then \
-        sudo pacman -S --needed $(cat {{dotfiles}}/arch/packages.txt); \
+    @if [ -f {{ dotfiles }}/arch/packages.txt ]; then \
+        sudo pacman -S --needed $(cat {{ dotfiles }}/arch/packages.txt); \
     else \
         echo "No packages.txt found"; \
     fi
-    @if [ -f {{dotfiles}}/arch/aur.txt ]; then \
-        paru -S --needed $(cat {{dotfiles}}/arch/aur.txt); \
+    @if [ -f {{ dotfiles }}/arch/aur.txt ]; then \
+        paru -S --needed $(cat {{ dotfiles }}/arch/aur.txt); \
     else \
         echo "No aur.txt found"; \
     fi
@@ -143,7 +138,7 @@ _ensure-arch:
 # Install all launchd jobs
 cron-install: _ensure-macos
     @echo "Installing launchd jobs..."
-    @for plist in {{dotfiles}}/cron/launchd/Library/LaunchAgents/*.plist; do \
+    @for plist in {{ dotfiles }}/cron/launchd/Library/LaunchAgents/*.plist; do \
         name=$(basename "$plist"); \
         cp "$plist" ~/Library/LaunchAgents/; \
         launchctl unload ~/Library/LaunchAgents/"$name" 2>/dev/null || true; \
@@ -155,7 +150,7 @@ cron-install: _ensure-macos
 # Uninstall all launchd jobs
 cron-uninstall: _ensure-macos
     @echo "Uninstalling launchd jobs..."
-    @for plist in {{dotfiles}}/cron/launchd/Library/LaunchAgents/*.plist; do \
+    @for plist in {{ dotfiles }}/cron/launchd/Library/LaunchAgents/*.plist; do \
         name=$(basename "$plist"); \
         launchctl unload ~/Library/LaunchAgents/"$name" 2>/dev/null || true; \
         rm -f ~/Library/LaunchAgents/"$name"; \
@@ -166,7 +161,7 @@ cron-uninstall: _ensure-macos
 # Show status of all cron jobs
 cron-status: _ensure-macos
     @echo "=== Installed LaunchAgents ==="
-    @for plist in {{dotfiles}}/cron/launchd/Library/LaunchAgents/*.plist; do \
+    @for plist in {{ dotfiles }}/cron/launchd/Library/LaunchAgents/*.plist; do \
         name=$(basename "$plist" .plist); \
         if launchctl list | grep -q "$name"; then \
             echo "✓ $name (loaded)"; \
@@ -178,25 +173,25 @@ cron-status: _ensure-macos
 # Show cron job logs
 cron-logs job="gtrash-prune":
     @echo "=== Application Log ==="
-    @tail -20 ~/.local/log/{{job}}.log 2>/dev/null || echo "No log file yet"
+    @tail -20 ~/.local/log/{{ job }}.log 2>/dev/null || echo "No log file yet"
     @echo ""
     @echo "=== launchd stdout ==="
-    @tail -10 /tmp/com.florinpopa.{{job}}.stdout.log 2>/dev/null || echo "No stdout log"
+    @tail -10 /tmp/com.florinpopa.{{ job }}.stdout.log 2>/dev/null || echo "No stdout log"
     @echo ""
     @echo "=== launchd stderr ==="
-    @tail -10 /tmp/com.florinpopa.{{job}}.stderr.log 2>/dev/null || echo "No stderr log"
+    @tail -10 /tmp/com.florinpopa.{{ job }}.stderr.log 2>/dev/null || echo "No stderr log"
 
 # Run a cron script manually for testing
 cron-test job="gtrash-prune":
-    @echo "Running {{job}} manually..."
-    {{dotfiles}}/cron/scripts/{{job}}.sh
+    @echo "Running {{ job }} manually..."
+    {{ dotfiles }}/cron/scripts/{{ job }}.sh
 
 # === INFO ===
 
 # Show current stow status
 status:
     @echo "=== Symlink Status ==="
-    @ls -la {{home}}/.zshrc {{home}}/.gitconfig {{home}}/.config/starship.toml {{home}}/.config/ghostty {{home}}/.claude/settings.json 2>/dev/null || echo "Some links missing"
+    @ls -la {{ home }}/.zshrc {{ home }}/.gitconfig {{ home }}/.config/starship.toml {{ home }}/.config/ghostty {{ home }}/.claude/settings.json 2>/dev/null || echo "Some links missing"
     @echo ""
     @echo "=== Git Status ==="
-    @cd {{dotfiles}} && git status --short
+    @cd {{ dotfiles }} && git status --short
