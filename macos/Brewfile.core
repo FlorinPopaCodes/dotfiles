@@ -1,7 +1,3 @@
-# Essential CLI tools - always installed
-tap "homebrew/bundle"
-tap "homebrew/services"
-
 # Core utilities
 brew "coreutils"
 brew "stow"

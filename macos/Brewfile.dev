@@ -8,9 +8,7 @@ tap "hookdeck/hookdeck"
 tap "oven-sh/bun"
 tap "puma/puma"
 tap "qmk/qmk"
-tap "stripe/stripe-cli"
 tap "supabase/tap"
-tap "twilio/brew"
 tap "steveyegge/beads"
 tap "withgraphite/tap"
 
@@ -40,19 +38,6 @@ brew "sccache"
 brew "openjdk"
 brew "openjdk@11"
 
-# Go tools (installed via go install)
-go "filippo.io/age/cmd/age"
-go "filippo.io/age/cmd/age-keygen"
-go "github.com/spf13/cobra-cli"
-go "github.com/go-delve/delve/cmd/dlv"
-go "github.com/kisielk/errcheck"
-go "github.com/kisielk/godepgraph"
-go "golang.org/x/tools/cmd/godoc"
-go "golang.org/x/tools/cmd/goimports"
-go "github.com/golangci/golangci-lint/cmd/golangci-lint"
-go "golang.org/x/tools/gopls"
-go "honnef.co/go/tools/cmd/staticcheck"
-
 # Docker and K8s
 brew "docker"
 brew "kind"
@@ -60,7 +45,6 @@ brew "act"
 
 # Databases
 brew "mysql-client"
-brew "mysql@8.0"
 
 # Cloud and DevOps
 brew "flyctl"
@@ -71,7 +55,6 @@ brew "hookdeck/hookdeck/hookdeck"
 
 # API tools
 brew "protobuf"
-brew "swagger-codegen"
 
 # Web dev
 brew "puma/puma/puma-dev"
@@ -95,6 +78,7 @@ brew "yt-dlp"
 
 # AI and CLI tools
 brew "ast-grep"
+brew "codex"
 brew "gemini-cli"
 brew "opencode"
 brew "steveyegge/beads/bd"
@@ -104,6 +88,7 @@ brew "gnu-getopt"
 brew "guile"
 brew "gnuplot"
 brew "yamllint"
+brew "mergiraf"
 brew "rclone"
 brew "socat"
 brew "speedtest-cli"
@@ -114,9 +99,3 @@ brew "p11-kit"
 brew "unbound"
 brew "gnutls"
 brew "utf8proc"
-
-# Misc dev builds
-go "maelstrom-echo"
-go "maelstrom-unique-ids"
-go "github.com/drand/tlock/cmd/tle"
-go "github.com/writefreely/writefreely/cmd/writefreely"
