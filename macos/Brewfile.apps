@@ -14,6 +14,7 @@ cask "obsidian"
 cask "notion"
 cask "todoist-app"
 cask "anki"
+cask "alt-tab"
 
 # Communication
 cask "discord"
