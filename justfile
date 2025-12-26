@@ -200,12 +200,3 @@ status:
     @echo ""
     @echo "=== Git Status ==="
     @cd {{dotfiles}} && git status --short
-
-# Show OS info
-info:
-    @echo "OS: $(uname -s)"
-    @echo "Dotfiles: {{dotfiles}}"
-    @echo "Home: {{home}}"
-    @command -v stow >/dev/null && echo "stow: $(which stow)" || echo "stow: not installed"
-    @command -v brew >/dev/null && echo "brew: $(which brew)" || echo "brew: not installed"
-    @command -v just >/dev/null && echo "just: $(which just)" || echo "just: not installed"
