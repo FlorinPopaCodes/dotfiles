@@ -2,10 +2,11 @@
 # Global pre-push hook: blocks pushes of gitbutler/* branches
 # Part of dotfiles - distributed via stow
 
-set -euo pipefail
+set -eo pipefail
 
 # Read refs from stdin (format: <local ref> <local sha> <remote ref> <remote sha>)
-while read -r local_ref local_sha remote_ref remote_sha; do
+while read -r local_ref local_sha remote_ref remote_sha || [[ -n "$local_ref" ]]; do
+    [[ -z "$local_ref" ]] && continue
     if [[ "$local_ref" == refs/heads/gitbutler/* ]]; then
         echo ""
         echo "Push blocked: gitbutler/* branches should not be pushed to remote."
