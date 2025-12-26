@@ -2,6 +2,26 @@
   "permissions": {
     "defaultMode": "default"
   },
+  "extraKnownMarketplaces": {
+    "beads-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "steveyegge/beads"
+      }
+    },
+    "florin-popa-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "FlorinPopaCodes/claude-marketplace"
+      }
+    },
+    "ast-grep-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "ast-grep/claude-skill"
+      }
+    }
+  },
   "hooks": {
     "PreCompact": [
       {
