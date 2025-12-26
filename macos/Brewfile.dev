@@ -17,6 +17,7 @@ tap "withgraphite/tap"
 # Build dependencies
 brew "cmake"
 brew "gcc"
+brew "git"
 brew "llvm"
 brew "openssl@3"
 brew "ncurses"
