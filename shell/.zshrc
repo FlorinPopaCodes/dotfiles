@@ -24,7 +24,6 @@ zinit wait lucid for \
     OMZP::bundler \
     OMZP::colored-man-pages \
     OMZP::command-not-found \
-    OMZP::common-aliases \
     OMZP::copyfile \
     OMZP::copypath \
     OMZP::docker \
@@ -73,7 +72,7 @@ zinit wait lucid for \
     atload'eval "$(rbenv init - zsh)"' \
     atload'eval "$(fzf --zsh)"' \
     atload'eval $(thefuck --alias f)' \
-    atload'eval "$(zoxide init zsh --cmd j)"' \
+    atload'eval "$(zoxide init zsh --cmd cd)"' \
   zdharma-continuum/null
 
 # === CONDITIONAL DEFERRED TOOLS ===
@@ -90,6 +89,22 @@ if command -v gcloud &>/dev/null; then
     source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
 fi
 
+# === FUNCTIONS ===
+# Clone GitHub repos to ~/Developer/owner/repo
+ghc() {
+  local url="$1"
+  local owner repo dest
+  if [[ "$url" =~ github\.com[:/]([^/]+)/([^/.]+) ]]; then
+    owner="${match[1]}"
+    repo="${match[2]%.git}"
+    dest="$HOME/Developer/$owner/$repo"
+    git clone "$url" "$dest" && cd "$dest"
+  else
+    echo "Invalid GitHub URL" >&2
+    return 1
+  fi
+}
+
 # === ALIASES ===
 # Safe delete: gtrash moves to XDG trash (~/.local/share/Trash)
 alias rm="gtrash put --rm-mode"
@@ -102,6 +117,10 @@ alias ls="eza --icons"
 alias ll="eza -la --icons --git"
 alias la="eza -a --icons"
 alias tree="eza --tree --icons"
+
+# Modern cd with zoxide
+alias j="cd"
+alias c="claude"
 
 # === ENVIRONMENT ===
 export EDITOR="nvim"
