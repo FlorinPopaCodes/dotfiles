@@ -17,6 +17,8 @@ Personal dotfiles managed with [GNU Stow](https://www.gnu.org/software/stow/) an
 │   ├── Brewfile.apps   # GUI applications
 │   ├── Brewfile.dev    # Development tools
 │   └── .macos          # macOS system defaults
+├── claude/         # Claude Code settings + commands
+├── cron/           # LaunchAgents + scheduled scripts
 ├── arch/           # Arch Linux packages (TODO)
 ├── scripts/        # Custom scripts
 └── justfile        # Automation recipes
@@ -69,19 +71,28 @@ just info         # Show environment info
 | `ssh` | SSH config with 1Password SSH agent |
 | `starship` | Custom prompt with git status and time |
 | `terminal/ghostty` | Ghostty terminal config with Solarized Light theme |
+| `claude` | Claude Code settings, commands, and statusline |
+| `cron` | LaunchAgents and scheduled scripts |
 
 ## Local Overrides
 
 Machine-specific configs are supported via `.local` files (not tracked by git):
 
+| File | Purpose |
+|------|---------|
+| `~/.gitconfig.local` | Work email, different signing keys |
+| `~/.zshrc.local` | Machine-specific paths, aliases |
+| `~/.claude/settings.local.json` | Machine-specific Claude plugins/hooks |
+
 ```bash
 # Git: different email for work
 cp git/.gitconfig.local.example ~/.gitconfig.local
-# Edit ~/.gitconfig.local with work settings
 
 # Shell: machine-specific paths, aliases
 cp shell/.zshrc.local.example ~/.zshrc.local
-# Edit ~/.zshrc.local with local settings
+
+# Claude: machine-specific settings
+cp claude/.claude/settings.local.json.example ~/.claude/settings.local.json
 ```
 
 ## Cross-Platform
@@ -96,6 +107,39 @@ cp shell/.zshrc.local.example ~/.zshrc.local
 | `Brewfile.core` | stow, just, neovim, starship, fzf, ripgrep, zoxide, git-delta |
 | `Brewfile.apps` | 1Password, Arc, Obsidian, Raycast, Ghostty |
 | `Brewfile.dev` | node, rust, ruby, docker, various CLI tools |
+
+Use `just brew-check` to see sync status between configs and installed packages.
+
+## Cron Jobs (macOS)
+
+Scheduled tasks use LaunchAgents with scripts in `cron/`:
+
+```bash
+just cron-install   # Install all launchd jobs
+just cron-status    # Show loaded/unloaded status
+just cron-test job  # Run a script manually
+just cron-logs job  # View logs for a job
+```
+
+Logs are stored in `~/.local/log/<job-name>.log`.
+
+## Key Shell Aliases
+
+| Alias | Command | Description |
+|-------|---------|-------------|
+| `rm` | `gtrash put --rm-mode` | Safe delete to XDG trash |
+| `c` | `claude` | Claude Code CLI |
+| `j` / `cd` | `zoxide` | Smart directory jumping |
+| `f` | `thefuck` | Fix last command |
+| `ghc <url>` | - | Clone GitHub repo to `~/Developer/owner/repo` |
+
+## Git Features
+
+- **Global hooks** at `~/.git-hooks/` (passthrough to project hooks)
+- **gitleaks** runs on pre-commit to block secrets
+- **gitbutler/** branches blocked from push
+- **GPG signing** via 1Password SSH
+- **delta** for diffs, **mergiraf** for merge conflicts
 
 ## TODO
 
