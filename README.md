@@ -108,7 +108,7 @@ cp claude/.claude/settings.local.json.example ~/.claude/settings.local.json
 | `Brewfile.apps` | 1Password, Arc, Obsidian, Raycast, Ghostty |
 | `Brewfile.dev` | node, rust, ruby, docker, various CLI tools |
 
-Use `just brew-check` to see sync status between configs and installed packages.
+Use `just brew-sync` to add untracked packages to the appropriate Brewfile.
 
 ## Cron Jobs (macOS)
 
