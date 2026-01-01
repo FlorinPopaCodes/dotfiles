@@ -37,6 +37,6 @@ Machine-specific configs (not tracked):
 
 ## Brewfiles
 - `Brewfile.core` — essential CLI tools
-- `Brewfile.apps` — GUI apps  
+- `Brewfile.apps` — GUI apps
 - `Brewfile.dev` — dev tools
-- `just brew-check` — show sync status between configs and system
+- `just brew-sync` — sync untracked packages into categorized Brewfiles
