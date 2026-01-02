@@ -92,18 +92,15 @@ fi
 # === FUNCTIONS ===
 # Clone GitHub repos to ~/Developer/owner/repo
 ghc() {
-  local url="$1"
-  local owner repo dest
-  if [[ "$url" =~ github\.com[:/]([^/]+)/([^/.]+) ]]; then
-    owner="${match[1]}"
-    repo="${match[2]%.git}"
-    dest="$HOME/Developer/$owner/$repo"
-    git clone "$url" "$dest" && cd "$dest"
-  else
-    echo "Invalid GitHub URL" >&2
-    return 1
-  fi
-}
+   local pat='github\.com[:/]([^/]+)/([^/.]+)'
+   [[ "$1" =~ $pat ]] || {
+     echo "Invalid GitHub URL" >&2
+     return 1
+   }
+   local dest="$HOME/Developer"
+   dest+="/${match[1]}/${match[2]%.git}"
+   git clone "$1" "$dest" && cd "$dest"
+ }
 
 # === ALIASES ===
 # Safe delete: gtrash moves to XDG trash (~/.local/share/Trash)
