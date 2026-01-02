@@ -1,6 +1,5 @@
 {
   "permissions": {
-    "defaultMode": "default",
     "allow": [
       "Bash(git status:*)",
       "Bash(git log:*)",
@@ -9,13 +8,11 @@
       "Bash(git branch:*)",
       "Bash(git remote:*)",
       "Bash(git stash list)",
-
       "Bash(but status:*)",
       "Bash(but log:*)",
       "Bash(but diff:*)",
       "Bash(but show:*)",
       "Bash(but branch:*)",
-
       "Bash(cat:*)",
       "Bash(ls:*)",
       "Bash(find:*)",
@@ -30,31 +27,10 @@
       "Bash(mkdir:*)",
       "Bash(touch:*)",
       "Bash(cp:*)",
-
       "mcp__plugin_context7_*",
-
       "Skill(frontend-design:frontend-design)"
-    ]
-  },
-  "extraKnownMarketplaces": {
-    "beads-marketplace": {
-      "source": {
-        "source": "github",
-        "repo": "steveyegge/beads"
-      }
-    },
-    "florin-popa-marketplace": {
-      "source": {
-        "source": "github",
-        "repo": "FlorinPopaCodes/claude-marketplace"
-      }
-    },
-    "ast-grep-marketplace": {
-      "source": {
-        "source": "github",
-        "repo": "ast-grep/claude-skill"
-      }
-    }
+    ],
+    "defaultMode": "default"
   },
   "hooks": {
     "PreCompact": [
@@ -87,7 +63,7 @@
   "enabledPlugins": {
     "always-works-testing@florin-popa-marketplace": true,
     "ast-grep@ast-grep-marketplace": true,
-    "beads@beads-marketplace": true,
+    "beads@beads-marketplace": false,
     "code-review@claude-plugins-official": false,
     "commit-commands@claude-plugins-official": true,
     "feature-dev@claude-plugins-official": true,
@@ -99,7 +75,35 @@
     "cognitive-load@florin-popa-marketplace": true,
     "simplicity-first@florin-popa-marketplace": true,
     "context7@claude-plugins-official": true,
-    "typescript-lsp@claude-plugins-official": true
+    "typescript-lsp@claude-plugins-official": true,
+    "dev-browser@dev-browser-marketplace": true,
+    "cloudflare-toolkit@florin-popa-marketplace": false
+  },
+  "extraKnownMarketplaces": {
+    "beads-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "steveyegge/beads"
+      }
+    },
+    "florin-popa-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "FlorinPopaCodes/claude-marketplace"
+      }
+    },
+    "ast-grep-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "ast-grep/claude-skill"
+      }
+    }
+  },
+  "sandbox": {
+    "autoAllowBashIfSandboxed": true,
+    "excludedCommands": [
+      "docker"
+    ]
   },
   "alwaysThinkingEnabled": true
 }
