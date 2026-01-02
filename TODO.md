@@ -11,3 +11,7 @@
   - [ ] I don't lose any work out of my sight which makes it dissapear
 - [ ] better brew-check, maybe a TUI?
 - [ ] add https://github.com/tw93/Mole
+- [ ] autopull repository
+- [ ] fix lefthook interaction with global git hooks
+- [ ] gtrash doesn't seem to work with sandbox...
+- [ ] add zed to sync
