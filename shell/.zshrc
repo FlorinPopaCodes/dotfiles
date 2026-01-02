@@ -121,6 +121,7 @@ alias tree="eza --tree --icons"
 # Modern cd with zoxide
 alias j="cd"
 alias c="claude"
+alias z="zed"
 
 # === ENVIRONMENT ===
 export EDITOR="nvim"
