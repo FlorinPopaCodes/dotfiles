@@ -24,11 +24,13 @@ brew "zoxide"
 brew "neovim"
 
 # Git
+brew "git"
 brew "gh"
 brew "git-delta"
 brew "git-absorb" # Remove
 brew "git-lfs"
 brew "lefthook"
+brew "jj"
 
 # Security
 brew "gitleaks"
@@ -37,8 +39,15 @@ brew "gitleaks"
 brew "gtrash"
 brew "mas"
 brew "mosh"
+brew "mole"
 brew "pam-reattach" # TODO: do I need this?
 
 # Fonts
+cask "font-atkinson-hyperlegible"
 cask "font-fira-code"
+cask "font-fira-code-nerd-font"
 cask "font-hack-nerd-font"
+cask "font-inter"
+cask "font-jetbrains-mono"
+cask "font-jetbrains-mono-nerd-font"
+cask "font-source-code-pro"

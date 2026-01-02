@@ -37,6 +37,7 @@ brew "rust"
 brew "sccache"
 brew "openjdk"
 brew "openjdk@11"
+brew "go"
 
 # Docker and K8s
 brew "docker"
@@ -52,6 +53,8 @@ brew "opentofu"
 brew "hashicorp/tap/vlt"
 brew "gocardless/taps/cli"
 brew "hookdeck/hookdeck/hookdeck"
+cask "google-cloud-sdk"
+cask "gcloud-cli"
 
 # API tools
 brew "protobuf"
@@ -78,7 +81,7 @@ brew "yt-dlp"
 
 # AI and CLI tools
 brew "ast-grep"
-brew "codex"
+cask "codex"
 brew "gemini-cli"
 brew "opencode"
 brew "steveyegge/beads/bd"
@@ -99,3 +102,5 @@ brew "p11-kit"
 brew "unbound"
 brew "gnutls"
 brew "utf8proc"
+brew "libpq"
+brew "llvm@17"
