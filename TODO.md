@@ -9,9 +9,10 @@
 - [ ] make sure that all I work on is visible and accessible so that:
   - [ ] I don't lose any work
   - [ ] I don't lose any work out of my sight which makes it dissapear
-- [ ] better brew-check, maybe a TUI?
+- [x] better brew-check, maybe a TUI? → replaced with `just brew-sync`
 - [ ] add https://github.com/tw93/Mole
 - [ ] autopull repository
 - [ ] fix lefthook interaction with global git hooks
 - [ ] gtrash doesn't seem to work with sandbox...
 - [ ] add zed to sync
+- [ ] move commands out of the context
