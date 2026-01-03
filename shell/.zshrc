@@ -119,6 +119,7 @@ alias tree="eza --tree --icons"
 alias j="cd"
 alias c="claude"
 alias z="zed"
+alias _="sudo"
 
 # === ENVIRONMENT ===
 export EDITOR="nvim"
