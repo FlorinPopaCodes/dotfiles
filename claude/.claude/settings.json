@@ -1,4 +1,7 @@
 {
+  "env": {
+    "ENABLE_TOOL_SEARCH": "true"
+  },
   "permissions": {
     "allow": [
       "Bash(git status:*)",
@@ -63,21 +66,18 @@
   "enabledPlugins": {
     "always-works-testing@florin-popa-marketplace": true,
     "ast-grep@ast-grep-marketplace": true,
-    "beads@beads-marketplace": false,
     "code-review@claude-plugins-official": false,
     "commit-commands@claude-plugins-official": true,
     "feature-dev@claude-plugins-official": true,
-    "frontend-design@claude-plugins-official": true,
-    "learning-output-style@claude-plugins-official": false,
+    "frontend-design@claude-plugins-official": false,
     "plugin-dev@claude-plugins-official": false,
     "security-guidance@claude-plugins-official": true,
     "rails-codegen@florin-popa-marketplace": false,
     "cognitive-load@florin-popa-marketplace": true,
     "simplicity-first@florin-popa-marketplace": true,
-    "context7@claude-plugins-official": true,
     "typescript-lsp@claude-plugins-official": true,
-    "dev-browser@dev-browser-marketplace": true,
-    "cloudflare-toolkit@florin-popa-marketplace": false
+    "dev-browser@dev-browser-marketplace": false,
+    "cloudflare-toolkit@florin-popa-marketplace": true
   },
   "extraKnownMarketplaces": {
     "beads-marketplace": {
