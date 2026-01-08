@@ -117,6 +117,7 @@ alias tree="eza --tree --icons"
 
 # Modern cd with zoxide
 alias j="cd"
+alias ji="cdi"
 alias c="claude"
 alias z="zed"
 alias _="sudo"
