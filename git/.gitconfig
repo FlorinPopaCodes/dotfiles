@@ -46,8 +46,10 @@
     format = ssh
 [gpg "ssh"]
     program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+[url "ssh://git@github.com/FlorinPopaCodes/"]
+    insteadOf = https://github.com/FlorinPopaCodes/
 [url "ssh://git@github.com/"]
-    insteadOf = https://github.com/
+    pushInsteadOf = https://github.com/
 [interactive]
     diffFilter = delta --color-only
 [delta]
