@@ -1,7 +1,4 @@
 {
-  "env": {
-    "ENABLE_TOOL_SEARCH": "true"
-  },
   "permissions": {
     "allow": [
       "Bash(git status:*)",
@@ -11,6 +8,8 @@
       "Bash(git branch:*)",
       "Bash(git remote:*)",
       "Bash(git stash list)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
       "Bash(but status:*)",
       "Bash(but log:*)",
       "Bash(but diff:*)",
@@ -35,33 +34,9 @@
     ],
     "defaultMode": "default"
   },
-  "hooks": {
-    "PreCompact": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bd prime"
-          }
-        ]
-      }
-    ],
-    "SessionStart": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bd prime"
-          }
-        ]
-      }
-    ]
-  },
   "statusLine": {
     "type": "command",
-    "command": "~/.claude/statusline.sh"
+    "command": "bash -c '\"/opt/homebrew/bin/bun\" \"$(ls -td ~/.claude/plugins/cache/claude-hud/claude-hud/*/ 2>/dev/null | head -1)src/index.ts\"'"
   },
   "enabledPlugins": {
     "always-works-testing@florin-popa-marketplace": true,
@@ -76,17 +51,17 @@
     "cognitive-load@florin-popa-marketplace": true,
     "simplicity-first@florin-popa-marketplace": true,
     "typescript-lsp@claude-plugins-official": true,
-    "dev-browser@dev-browser-marketplace": false,
     "cloudflare-toolkit@florin-popa-marketplace": false,
-    "sentry-skills@sentry-skills": true
+    "sentry-skills@sentry-skills": true,
+    "claude-hud@claude-hud": true,
+    "context7@claude-plugins-official": true,
+    "astral@astral-sh": true,
+    "clangd-lsp@claude-plugins-official": true,
+    "gopls-lsp@claude-plugins-official": true,
+    "impeccable@impeccable": true,
+    "context-mode@claude-context-mode": true
   },
   "extraKnownMarketplaces": {
-    "beads-marketplace": {
-      "source": {
-        "source": "github",
-        "repo": "steveyegge/beads"
-      }
-    },
     "florin-popa-marketplace": {
       "source": {
         "source": "github",
@@ -105,6 +80,5 @@
     "excludedCommands": [
       "docker"
     ]
-  },
-  "alwaysThinkingEnabled": true
+  }
 }

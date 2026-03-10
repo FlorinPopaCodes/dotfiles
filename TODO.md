@@ -8,7 +8,7 @@
 - [ ] use keyd on arch to flip ctrl and alt
 - [ ] make sure that all I work on is visible and accessible so that:
   - [ ] I don't lose any work
-  - [ ] I don't lose any work out of my sight which makes it dissapear
+  - [ ] I don't lose any work out of my sight which makes it disappear
 - [x] better brew-check, maybe a TUI? → replaced with `just brew-sync`
 - [ ] add https://github.com/tw93/Mole
 - [ ] autopull repository
@@ -16,3 +16,4 @@
 - [ ] gtrash doesn't seem to work with sandbox...
 - [ ] add zed to sync
 - [ ] move commands out of the context
+- [ ] https://github.com/google/clasp
