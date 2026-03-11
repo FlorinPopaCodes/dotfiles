@@ -1,0 +1,238 @@
+darwin:
+  taps:
+    - buo/cask-upgrade
+    - cloudflare/cloudflare
+    - derailed/k9s
+    - fluxcd/tap
+    - gocardless/taps
+    - hashicorp/tap
+    - hookdeck/hookdeck
+    - oven-sh/bun
+    - osx-cross/arm
+    - osx-cross/avr
+    - puma/puma
+    - qmk/qmk
+    - supabase/tap
+    - steveyegge/beads
+    - withgraphite/tap
+
+  brews:
+    # Core utilities
+    - coreutils
+    - chezmoi
+    - just
+    - wget
+    - jq
+    - htop
+    - tlrc
+    - ripgrep
+    - the_silver_searcher
+    - fzf
+    - bat
+    - eza
+    # Shell
+    - bash
+    - zinit
+    - starship
+    - thefuck
+    - direnv
+    - zoxide
+    # Editor
+    - neovim
+    # Git
+    - git
+    - gh
+    - git-delta
+    - git-absorb
+    - git-lfs
+    - lefthook
+    - jj
+    # Security
+    - gitleaks
+    # Essentials
+    - gtrash
+    - mas
+    - mosh
+    - mole
+    - pam-reattach
+    # Build dependencies
+    - cmake
+    - gcc
+    - llvm
+    - openssl@3
+    - ncurses
+    - readline
+    - libffi
+    - pkgconf
+    - zstd
+    # Languages and runtimes
+    - node
+    - pnpm
+    - oven-sh/bun/bun
+    - python@3.10
+    - pipenv
+    - uv
+    - ruby-build
+    - rbenv
+    - rust
+    - sccache
+    - openjdk
+    - openjdk@11
+    - go
+    # Docker and K8s
+    - docker
+    - kind
+    - act
+    # Databases
+    - mysql-client
+    # Cloud and DevOps
+    - flyctl
+    - opentofu
+    - hashicorp/tap/vlt
+    - gocardless/taps/cli
+    - hookdeck/hookdeck/hookdeck
+    # API tools
+    - protobuf
+    # Web dev
+    - puma/puma/puma-dev
+    # QMK (keyboard firmware)
+    - qmk/qmk/qmk
+    # Media processing
+    - ffmpeg
+    - jpeg-xl
+    - libheif
+    - harfbuzz
+    - sdl2
+    - tesseract
+    - ghostscript
+    - poppler
+    - pillow
+    - yt-dlp
+    # AI and CLI tools
+    - ast-grep
+    - gemini-cli
+    - opencode
+    - steveyegge/beads/bd
+    # Other dev tools
+    - gnu-getopt
+    - guile
+    - gnuplot
+    - yamllint
+    - mergiraf
+    - rclone
+    - socat
+    - speedtest-cli
+    - typst
+    - exercism
+    - krb5
+    - p11-kit
+    - unbound
+    - gnutls
+    - utf8proc
+    - libpq
+    - llvm@17
+
+  casks:
+    # Fonts
+    - font-atkinson-hyperlegible
+    - font-fira-code
+    - font-fira-code-nerd-font
+    - font-hack-nerd-font
+    - font-inter
+    - font-jetbrains-mono
+    - font-jetbrains-mono-nerd-font
+    - font-source-code-pro
+    # Browsers
+    - arc
+    - firefox
+    - google-chrome
+    # Productivity
+    - 1password
+    - 1password-cli
+    - raycast
+    - obsidian
+    - notion
+    - todoist-app
+    - anki
+    - alt-tab
+    # Communication
+    - discord
+    - zoom
+    # Media
+    - spotify
+    - vlc
+    - transmission
+    # Terminals
+    - ghostty
+    # Dev tools (GUI)
+    - gitbutler
+    - cursor
+    - visual-studio-code
+    - zed
+    - jetbrains-toolbox
+    - postman
+    - devutils
+    - db-browser-for-sqlite
+    - codex
+    # Cloud
+    - google-cloud-sdk
+    - gcloud-cli
+    # Utilities
+    - adobe-acrobat-reader
+    - arq
+    - betterdisplay
+    - dropbox
+    - kopiaui
+    # Hardware
+    - wacom-tablet
+    - prusaslicer
+    - autodesk-fusion
+
+  mas:
+    - { name: "1Password for Safari", id: 1569813296 }
+    - { name: "Final Cut Pro", id: 424389933 }
+    - { name: "keymapp", id: 6472865291 }
+    - { name: "reMarkable", id: 1276493162 }
+    - { name: "Tailscale", id: 1475387142 }
+    - { name: "Pages", id: 409201541 }
+    - { name: "Numbers", id: 409203825 }
+    - { name: "Keynote", id: 409183694 }
+    - { name: "Slack", id: 803453959 }
+    - { name: "Sequel Ace", id: 1518036000 }
+
+linux:
+  pacman:
+    - base-devel
+    - git
+    - chezmoi
+    - neovim
+    - ripgrep
+    - fzf
+    - bat
+    - eza
+    - starship
+    - zoxide
+    - direnv
+    - just
+    - jq
+    - htop
+    - wget
+    - thefuck
+    - git-delta
+    - git-lfs
+    - openssh
+    - go
+    - rust
+    - python
+    - uv
+    - node
+    - pnpm
+    - docker
+    - ffmpeg
+
+  aur:
+    - gtrash-bin
+    - zinit
+    - 1password
+    - 1password-cli
+    - ghostty

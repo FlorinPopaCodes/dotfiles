@@ -1,0 +1,16 @@
+# Ghostty terminal configuration
+# Docs: https://ghostty.org/docs/config
+
+# Font
+font-family = "JetBrains Mono Nerd Font Mono"
+font-size = 13
+
+# Theme
+theme = Catppuccin Mocha
+{{ if eq .chezmoi.os "darwin" }}
+# MacOS
+macos-icon = holographic
+
+# Quick Terminal
+keybind = global:cmd+backquote=toggle_quick_terminal
+{{ end -}}

@@ -1,13 +1,19 @@
 ## Development Workflow
 - Never use the git commit command after a task is finished, use `but` or `but status` to see commit references.
-- Run `just check` before stowing to detect conflicts
-- Run `just restow` after modifying dotfiles structure
-- Run `just status` to verify symlinks and git state
+- Run `just diff` to preview changes before applying
+- Run `just apply` to apply dotfiles
+- Run `just status` to verify managed files and git state
 
-## Stow Structure
-- **Nested stow**: `terminal/` uses `--target=$HOME` from subdirectory (different pattern)
-- Module paths mirror `$HOME`: e.g., `claude/.claude/` → `~/.claude/`, `ssh/.ssh/` → `~/.ssh/`
-- Files prefixed with `.` become dotfiles in `$HOME`
+## Chezmoi Structure
+- Source dir: `~/.dotfiles/` (set via `sourceDir` in `.chezmoi.yaml.tmpl`)
+- `dot_` prefix → `.` in home (e.g., `dot_zshrc.tmpl` → `~/.zshrc`)
+- `private_` prefix → 0600 permissions (e.g., `private_dot_ssh/`)
+- `executable_` prefix → 0755 permissions
+- `.tmpl` suffix → Go template with OS/machine conditionals
+- `.chezmoidata/` → YAML data files (packages, machines)
+- `.chezmoiscripts/` → `run_onchange_` scripts triggered by content hash changes
+- `.chezmoiignore` → OS-conditional file exclusions
+- `claude/` dir is NOT managed by chezmoi (ignored in `.chezmoiignore`)
 
 ## Key Aliases
 - `rm` → `gtrash put --rm-mode` (safe delete to XDG trash)
@@ -29,14 +35,15 @@ Machine-specific configs (not tracked):
 - `~/.zshrc.local` — sourced at end of .zshrc
 - `~/.claude/settings.local.json`
 
-## Cron Jobs
-- LaunchAgents: `cron/launchd/Library/LaunchAgents/`
-- Scripts: `cron/scripts/<job-name>.sh`
+## Scheduled Tasks
+- macOS: `Library/LaunchAgents/` — managed by chezmoi, installed via `run_onchange_` script
+- Linux: `dot_config/systemd/user/` — timers enabled via `run_onchange_` script
+- Scripts: `scripts/<job-name>.sh`
 - Logs: `~/.local/log/<job-name>.log`
-- Commands: `just cron-install`, `just cron-status`, `just cron-test <job>`, `just cron-logs <job>`
+- Commands: `just cron-test <job>`, `just cron-logs <job>`
 
-## Brewfiles
-- `Brewfile.core` — essential CLI tools
-- `Brewfile.apps` — GUI apps
-- `Brewfile.dev` — dev tools
-- `just brew-sync` — sync untracked packages into categorized Brewfiles
+## Packages
+- `.chezmoidata/packages.yaml` — declarative package lists (darwin + linux)
+- `run_onchange_darwin-packages.sh.tmpl` — auto-runs `brew bundle` when packages.yaml changes
+- `run_onchange_linux-packages.sh.tmpl` — auto-runs `pacman`/`paru` when packages.yaml changes
+- `just brew-sync` — sync untracked brew packages into packages.yaml

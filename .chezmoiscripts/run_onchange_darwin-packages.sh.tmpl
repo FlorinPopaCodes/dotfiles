@@ -1,0 +1,22 @@
+{{ if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+set -euo pipefail
+# Hash: {{ include ".chezmoidata/packages.yaml" | sha256sum }}
+
+echo "Installing packages via brew bundle..."
+
+brew bundle --no-lock --file=/dev/stdin <<EOF
+{{ range .darwin.taps -}}
+tap {{ . | quote }}
+{{ end -}}
+{{ range .darwin.brews -}}
+brew {{ . | quote }}
+{{ end -}}
+{{ range .darwin.casks -}}
+cask {{ . | quote }}
+{{ end -}}
+{{ range .darwin.mas -}}
+mas {{ .name | quote }}, id: {{ .id }}
+{{ end -}}
+EOF
+{{ end -}}

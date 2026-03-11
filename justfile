@@ -1,174 +1,50 @@
-# Dotfiles management with just
-# Usage: just <recipe>
-
-set dotenv-load := true
 set shell := ["bash", "-cu"]
-
-home := env_var("HOME")
 dotfiles := justfile_directory()
 
 # Default: show available recipes
 default:
     @just --list
 
-# === STOW OPERATIONS ===
+# === CHEZMOI OPERATIONS ===
 
-# Stow all core modules (shell, git, starship, claude)
-stow: _ensure-stow
-    @echo "Stowing core modules..."
-    cd {{ dotfiles }} && stow --verbose shell git starship claude ssh
-    @echo "Stowing terminal configs..."
-    cd {{ dotfiles }}/terminal && stow --verbose --target={{ home }} ghostty
-    @echo "Done!"
+# Apply all dotfiles
+apply:
+    chezmoi apply -v
 
-# Unstow all modules
-unstow:
-    @echo "Unstowing all modules..."
-    cd {{ dotfiles }} && stow --verbose --delete shell git starship claude ssh || true
-    cd {{ dotfiles }}/terminal && stow --verbose --delete --target={{ home }} ghostty || true
-    @echo "Done!"
+# Show what would change
+diff:
+    chezmoi diff
 
-# Restow (unstow + stow) - useful after updates
-restow: unstow stow
+# Pull remote changes and apply
+update:
+    chezmoi update -v
 
-# Dry-run stow to check for conflicts
-check:
-    @echo "Checking for stow conflicts..."
-    cd {{ dotfiles }} && stow --verbose --simulate shell git starship claude ssh
-    cd {{ dotfiles }}/terminal && stow --verbose --simulate --target={{ home }} ghostty
+# Re-init config (after changing .chezmoi.yaml.tmpl)
+init:
+    chezmoi init --source {{ dotfiles }}
 
-# Adopt existing files into dotfiles (overwrites dotfiles with existing)
-adopt:
-    @echo "Adopting existing files..."
-    cd {{ dotfiles }} && stow --verbose --adopt shell git starship claude ssh
-    cd {{ dotfiles }}/terminal && stow --verbose --adopt --target={{ home }} ghostty
+# Edit a managed file (opens source, applies on save)
+edit file:
+    chezmoi edit {{ file }}
 
 # === BREW OPERATIONS (macOS only) ===
 
-# Install core CLI tools
-brew-core: _ensure-macos _ensure-brew
-    @echo "Installing core packages..."
-    brew bundle install --file={{ dotfiles }}/macos/Brewfile.core
-
-# Install GUI apps
-brew-apps: _ensure-macos _ensure-brew
-    @echo "Installing GUI apps..."
-    brew bundle install --file={{ dotfiles }}/macos/Brewfile.apps
-
-# Install dev tools
-brew-dev: _ensure-macos _ensure-brew
-    @echo "Installing dev tools..."
-    brew bundle install --file={{ dotfiles }}/macos/Brewfile.dev
-
-# Install all brew packages
-brew-all: brew-core brew-apps brew-dev
-
-# Dump current brew packages to Brewfiles
-brew-dump: _ensure-macos _ensure-brew
-    @echo "Dumping brew packages (backup before running)..."
-    brew bundle dump --force --file={{ dotfiles }}/macos/Brewfile.dump
-    @echo "Dumped to macos/Brewfile.dump"
-
-# Sync untracked brew packages into categorized Brewfiles
+# Sync untracked brew packages into packages.yaml
 brew-sync *args: _ensure-macos _ensure-brew
     @DOTFILES={{ dotfiles }} {{ dotfiles }}/scripts/brew-sync.sh {{ args }}
 
 # === MACOS DEFAULTS ===
 
-# Apply macOS system defaults (creates .macos if missing)
+# Apply macOS system defaults
 macos-defaults: _ensure-macos
     @echo "Applying macOS defaults..."
-    @if [ -f {{ dotfiles }}/macos/.macos ]; then \
-        bash {{ dotfiles }}/macos/.macos; \
+    @if [ -f {{ dotfiles }}/scripts/macos-defaults.sh ]; then \
+        bash {{ dotfiles }}/scripts/macos-defaults.sh; \
     else \
-        echo "No .macos script found. Create one at macos/.macos"; \
+        echo "No macos-defaults.sh found"; \
     fi
 
-# === ARCH LINUX OPERATIONS ===
-
-# Install packages on Arch Linux
-arch-install: _ensure-arch
-    @echo "Installing Arch packages..."
-    @if [ -f {{ dotfiles }}/arch/packages.txt ]; then \
-        sudo pacman -S --needed $(cat {{ dotfiles }}/arch/packages.txt); \
-    else \
-        echo "No packages.txt found"; \
-    fi
-    @if [ -f {{ dotfiles }}/arch/aur.txt ]; then \
-        paru -S --needed $(cat {{ dotfiles }}/arch/aur.txt); \
-    else \
-        echo "No aur.txt found"; \
-    fi
-
-# === BOOTSTRAP ===
-
-# Full bootstrap: install deps + stow
-bootstrap:
-    @echo "Bootstrapping dotfiles..."
-    @if [ "$(uname)" = "Darwin" ]; then \
-        just brew-core && just stow; \
-    elif [ -f /etc/arch-release ]; then \
-        just arch-install && just stow; \
-    else \
-        echo "Unknown OS. Installing stow manually..."; \
-        just stow; \
-    fi
-    @echo "Bootstrap complete!"
-
-# === HELPER RECIPES ===
-
-# Ensure stow is installed
-_ensure-stow:
-    @command -v stow >/dev/null || (echo "stow not found. Installing..." && brew install stow)
-
-# Ensure brew is installed
-_ensure-brew:
-    @command -v brew >/dev/null || (echo "brew not found. Install from https://brew.sh" && exit 1)
-
-# Ensure running on macOS
-_ensure-macos:
-    @[ "$(uname)" = "Darwin" ] || (echo "This recipe is macOS only" && exit 1)
-
-# Ensure running on Arch Linux
-_ensure-arch:
-    @[ -f /etc/arch-release ] || (echo "This recipe is Arch Linux only" && exit 1)
-
-# === CRON/LAUNCHD OPERATIONS (macOS) ===
-
-# Install all launchd jobs
-cron-install: _ensure-macos
-    @echo "Installing launchd jobs..."
-    @for plist in {{ dotfiles }}/cron/launchd/Library/LaunchAgents/*.plist; do \
-        name=$(basename "$plist"); \
-        cp "$plist" ~/Library/LaunchAgents/; \
-        launchctl unload ~/Library/LaunchAgents/"$name" 2>/dev/null || true; \
-        launchctl load ~/Library/LaunchAgents/"$name"; \
-        echo "Installed: $name"; \
-    done
-    @echo "Done! Use 'just cron-status' to verify."
-
-# Uninstall all launchd jobs
-cron-uninstall: _ensure-macos
-    @echo "Uninstalling launchd jobs..."
-    @for plist in {{ dotfiles }}/cron/launchd/Library/LaunchAgents/*.plist; do \
-        name=$(basename "$plist"); \
-        launchctl unload ~/Library/LaunchAgents/"$name" 2>/dev/null || true; \
-        rm -f ~/Library/LaunchAgents/"$name"; \
-        echo "Removed: $name"; \
-    done
-    @echo "Done!"
-
-# Show status of all cron jobs
-cron-status: _ensure-macos
-    @echo "=== Installed LaunchAgents ==="
-    @for plist in {{ dotfiles }}/cron/launchd/Library/LaunchAgents/*.plist; do \
-        name=$(basename "$plist" .plist); \
-        if launchctl list | grep -q "$name"; then \
-            echo "✓ $name (loaded)"; \
-        else \
-            echo "✗ $name (not loaded)"; \
-        fi; \
-    done
+# === CRON/SCHEDULED TASKS ===
 
 # Show cron job logs
 cron-logs job="gtrash-prune":
@@ -184,14 +60,32 @@ cron-logs job="gtrash-prune":
 # Run a cron script manually for testing
 cron-test job="gtrash-prune":
     @echo "Running {{ job }} manually..."
-    {{ dotfiles }}/cron/scripts/{{ job }}.sh
+    {{ dotfiles }}/scripts/{{ job }}.sh
 
-# === INFO ===
+# === STATUS ===
 
-# Show current stow status
+# Show dotfiles status
 status:
-    @echo "=== Symlink Status ==="
-    @ls -la {{ home }}/.zshrc {{ home }}/.gitconfig {{ home }}/.config/starship.toml {{ home }}/.config/ghostty {{ home }}/.claude/settings.json 2>/dev/null || echo "Some links missing"
+    @echo "=== Managed Files ==="
+    @chezmoi status
     @echo ""
     @echo "=== Git Status ==="
     @cd {{ dotfiles }} && git status --short
+
+# Show what chezmoi manages
+managed:
+    chezmoi managed
+
+# === BOOTSTRAP ===
+
+# Bootstrap on a new machine
+bootstrap:
+    chezmoi init --apply FlorinPopaCodes/dotfiles
+
+# === HELPERS ===
+
+_ensure-brew:
+    @command -v brew >/dev/null || (echo "brew not found. Install from https://brew.sh" && exit 1)
+
+_ensure-macos:
+    @[ "$(uname)" = "Darwin" ] || (echo "This recipe is macOS only" && exit 1)
