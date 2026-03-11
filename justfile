@@ -27,17 +27,6 @@ init:
 edit file:
     chezmoi edit {{ file }}
 
-# === MACOS DEFAULTS ===
-
-# Apply macOS system defaults
-macos-defaults: _ensure-macos
-    @echo "Applying macOS defaults..."
-    @if [ -f {{ dotfiles }}/scripts/macos-defaults.sh ]; then \
-        bash {{ dotfiles }}/scripts/macos-defaults.sh; \
-    else \
-        echo "No macos-defaults.sh found"; \
-    fi
-
 # === STATUS ===
 
 # Show dotfiles status
@@ -57,8 +46,3 @@ managed:
 # Bootstrap on a new machine
 bootstrap:
     chezmoi init --apply FlorinPopaCodes/dotfiles
-
-# === HELPERS ===
-
-_ensure-macos:
-    @[ "$(uname)" = "Darwin" ] || (echo "This recipe is macOS only" && exit 1)
