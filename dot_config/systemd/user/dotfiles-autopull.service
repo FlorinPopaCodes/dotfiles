@@ -3,4 +3,4 @@ Description=Auto-pull dotfiles and apply via chezmoi
 
 [Service]
 Type=oneshot
-ExecStart=%h/.dotfiles/scripts/autopull.sh
+ExecStart=/bin/bash -c 'cd "$HOME/.dotfiles" && [[ "$(git rev-parse --abbrev-ref HEAD)" == gitbutler/* ]] && exit 0; chezmoi update --force'

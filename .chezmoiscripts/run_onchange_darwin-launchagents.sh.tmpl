@@ -6,7 +6,7 @@ set -euo pipefail
 
 echo "Installing LaunchAgents..."
 
-for plist in ~/private_Library/LaunchAgents/com.florinpopa.*.plist; do
+for plist in ~/Library/LaunchAgents/com.florinpopa.*.plist; do
     [[ -f "$plist" ]] || continue
     name=$(basename "$plist")
     label="${name%.plist}"
