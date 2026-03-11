@@ -9,7 +9,7 @@
     <array>
         <string>/bin/bash</string>
         <string>-c</string>
-        <string>export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"; cd "$HOME/.dotfiles" &amp;&amp; [[ "$(git rev-parse --abbrev-ref HEAD)" == gitbutler/* ]] &amp;&amp; exit 0; chezmoi update --force</string>
+        <string>export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"; cd "$HOME/.dotfiles" &amp;&amp; [[ "$(git rev-parse --abbrev-ref HEAD)" == gitbutler/* ]] &amp;&amp; exit 0; git fetch origin &amp;&amp; git verify-commit FETCH_HEAD &amp;&amp; chezmoi update --force</string>
     </array>
 
     <key>StartInterval</key>
