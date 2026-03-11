@@ -50,7 +50,6 @@ darwin:
     # Security
     - gitleaks
     # Essentials
-    - gtrash
     - mas
     - mosh
     - mole
@@ -231,7 +230,6 @@ linux:
     - ffmpeg
 
   aur:
-    - gtrash-bin
     - zinit
     - 1password
     - 1password-cli

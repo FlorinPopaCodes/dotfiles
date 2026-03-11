@@ -44,24 +44,6 @@ macos-defaults: _ensure-macos
         echo "No macos-defaults.sh found"; \
     fi
 
-# === CRON/SCHEDULED TASKS ===
-
-# Show cron job logs
-cron-logs job="gtrash-prune":
-    @echo "=== Application Log ==="
-    @tail -20 ~/.local/log/{{ job }}.log 2>/dev/null || echo "No log file yet"
-    @echo ""
-    @echo "=== launchd stdout ==="
-    @tail -10 /tmp/com.florinpopa.{{ job }}.stdout.log 2>/dev/null || echo "No stdout log"
-    @echo ""
-    @echo "=== launchd stderr ==="
-    @tail -10 /tmp/com.florinpopa.{{ job }}.stderr.log 2>/dev/null || echo "No stderr log"
-
-# Run a cron script manually for testing
-cron-test job="gtrash-prune":
-    @echo "Running {{ job }} manually..."
-    {{ dotfiles }}/scripts/{{ job }}.sh
-
 # === STATUS ===
 
 # Show dotfiles status

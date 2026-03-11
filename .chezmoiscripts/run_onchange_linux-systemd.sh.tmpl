@@ -2,14 +2,12 @@
 #!/bin/bash
 set -euo pipefail
 # Hash: {{ include "dot_config/systemd/user/dotfiles-autopull.timer" | sha256sum }}
-# Hash: {{ include "dot_config/systemd/user/gtrash-prune.timer" | sha256sum }}
 
 echo "Enabling systemd user timers..."
 
 systemctl --user daemon-reload
 systemctl --user enable --now dotfiles-autopull.timer
-systemctl --user enable --now gtrash-prune.timer
 
 echo "Timers enabled:"
-systemctl --user list-timers dotfiles-autopull.timer gtrash-prune.timer
+systemctl --user list-timers dotfiles-autopull.timer
 {{ end -}}

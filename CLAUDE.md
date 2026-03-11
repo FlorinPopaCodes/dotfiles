@@ -16,7 +16,6 @@
 - `claude/` dir is NOT managed by chezmoi (ignored in `.chezmoiignore`)
 
 ## Key Aliases
-- `rm` → `gtrash put --rm-mode` (safe delete to XDG trash)
 - `c` → `claude`
 - `j` / `cd` → zoxide (smart cd)
 - `f` → thefuck
@@ -34,13 +33,6 @@ Machine-specific configs (not tracked):
 - `~/.gitconfig.local` — included via git's `[include]`
 - `~/.zshrc.local` — sourced at end of .zshrc
 - `~/.claude/settings.local.json`
-
-## Scheduled Tasks
-- macOS: `Library/LaunchAgents/` — managed by chezmoi, installed via `run_onchange_` script
-- Linux: `dot_config/systemd/user/` — timers enabled via `run_onchange_` script
-- Scripts: `scripts/<job-name>.sh`
-- Logs: `~/.local/log/<job-name>.log`
-- Commands: `just cron-test <job>`, `just cron-logs <job>`
 
 ## Packages
 - `.chezmoidata/packages.yaml` — declarative package lists (darwin + linux)
