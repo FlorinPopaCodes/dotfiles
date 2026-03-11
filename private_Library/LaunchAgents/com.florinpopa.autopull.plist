@@ -9,7 +9,7 @@
     <array>
         <string>/bin/bash</string>
         <string>-c</string>
-        <string>export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"; "$HOME/.dotfiles/scripts/autopull.sh"</string>
+        <string>export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"; cd "$HOME/.dotfiles" &amp;&amp; [[ "$(git rev-parse --abbrev-ref HEAD)" == gitbutler/* ]] &amp;&amp; exit 0; chezmoi update --force</string>
     </array>
 
     <key>StartInterval</key>
