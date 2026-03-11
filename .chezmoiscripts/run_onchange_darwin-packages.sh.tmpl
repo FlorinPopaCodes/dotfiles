@@ -1,11 +1,12 @@
 {{ if eq .chezmoi.os "darwin" -}}
 #!/bin/bash
-set -euo pipefail
+set -uo pipefail
 # Hash: {{ include ".chezmoidata/packages.yaml" | sha256sum }}
 
 echo "Installing packages via brew bundle..."
 
-brew bundle --no-lock --file=/dev/stdin <<EOF
+# Allow partial failures (e.g. MAS apps needing sudo in non-TTY)
+brew bundle --file=/dev/stdin <<EOF || true
 {{ range .darwin.taps -}}
 tap {{ . | quote }}
 {{ end -}}
