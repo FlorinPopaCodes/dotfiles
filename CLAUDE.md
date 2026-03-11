@@ -38,4 +38,3 @@ Machine-specific configs (not tracked):
 - `.chezmoidata/packages.yaml` — declarative package lists (darwin + linux)
 - `run_onchange_darwin-packages.sh.tmpl` — auto-runs `brew bundle` when packages.yaml changes
 - `run_onchange_linux-packages.sh.tmpl` — auto-runs `pacman`/`paru` when packages.yaml changes
-- `just brew-sync` — sync untracked brew packages into packages.yaml

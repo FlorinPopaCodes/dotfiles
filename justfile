@@ -27,12 +27,6 @@ init:
 edit file:
     chezmoi edit {{ file }}
 
-# === BREW OPERATIONS (macOS only) ===
-
-# Sync untracked brew packages into packages.yaml
-brew-sync *args: _ensure-macos _ensure-brew
-    @DOTFILES={{ dotfiles }} {{ dotfiles }}/scripts/brew-sync.sh {{ args }}
-
 # === MACOS DEFAULTS ===
 
 # Apply macOS system defaults
@@ -65,9 +59,6 @@ bootstrap:
     chezmoi init --apply FlorinPopaCodes/dotfiles
 
 # === HELPERS ===
-
-_ensure-brew:
-    @command -v brew >/dev/null || (echo "brew not found. Install from https://brew.sh" && exit 1)
 
 _ensure-macos:
     @[ "$(uname)" = "Darwin" ] || (echo "This recipe is macOS only" && exit 1)
