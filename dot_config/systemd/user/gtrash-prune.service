@@ -1,0 +1,6 @@
+[Unit]
+Description=Prune trash files older than 30 days
+
+[Service]
+Type=oneshot
+ExecStart=%h/.dotfiles/scripts/gtrash-prune.sh

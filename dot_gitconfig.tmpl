@@ -1,0 +1,87 @@
+[user]
+    name = Florin Popa
+    email = {{ .email }}
+    signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBoDrobY6yVanyC6bncei3kseeYawWXwrdT+i+cSsAiz
+[color]
+    ui = auto
+[log]
+    date = iso
+[status]
+    showStash = true
+[push]
+    default = current
+    autoSetupRemote = true
+    followTags = true
+[fetch]
+    prune = true
+    pruneTags = true
+    fsckobjects = true
+[transfer]
+    fsckobjects = true
+[receive]
+    fsckObjects = true
+[pull]
+    rebase = true
+[rebase]
+    autoStash = true
+    autoSquash = true
+    updateRefs = true
+    missingCommitsCheck = error
+[rerere]
+    enabled = true
+[init]
+    defaultBranch = main
+[core]
+    pager = delta
+    excludesfile = ~/.gitignore_global
+    hooksPath = ~/.git-hooks
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+[commit]
+    gpgsign = true
+    verbose = true
+[gpg]
+    format = ssh
+[gpg "ssh"]
+{{ if eq .chezmoi.os "darwin" -}}
+    program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+{{ else -}}
+    program = /opt/1Password/op-ssh-sign
+{{ end -}}
+{{ if not .isWork -}}
+[url "ssh://git@github.com/FlorinPopaCodes/"]
+    insteadOf = https://github.com/FlorinPopaCodes/
+[url "ssh://git@github.com/"]
+    pushInsteadOf = https://github.com/
+{{ end -}}
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    navigate = true
+    line-numbers = true
+    side-by-side = true
+[merge]
+    conflictStyle = zdiff3
+[diff]
+    colorMoved = default
+    algorithm = histogram
+[branch]
+    sort = -committerdate
+    autoSetupMerge = simple
+[tag]
+    sort = -version:refname
+[help]
+    autocorrect = prompt
+[gitbutler]
+    aiModelProvider = anthropic
+    aiAnthropicKeyOption = butlerAPI
+[merge "mergiraf"]
+    name = mergiraf
+    driver = mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P -l %L
+
+# Include local overrides (not tracked by git)
+[include]
+    path = ~/.gitconfig.local

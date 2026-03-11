@@ -1,0 +1,17 @@
+{{- $email := "456185+FlorinPopaCodes@users.noreply.github.com" -}}
+{{- $isWork := false -}}
+
+{{- /* Machine classification by hostname */ -}}
+{{- if eq .chezmoi.hostname "agon-soft-mac-mini-m1-01" -}}
+{{-   $isWork = true -}}
+{{- end -}}
+
+{{- if $isWork -}}
+{{-   $email = promptStringOnce . "email" "Work email address" -}}
+{{- end -}}
+
+sourceDir: {{ .chezmoi.homeDir }}/.dotfiles
+
+data:
+  email: {{ $email | quote }}
+  isWork: {{ $isWork }}

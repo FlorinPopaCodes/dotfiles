@@ -1,0 +1,6 @@
+[Unit]
+Description=Auto-pull dotfiles and apply via chezmoi
+
+[Service]
+Type=oneshot
+ExecStart=%h/.dotfiles/scripts/autopull.sh

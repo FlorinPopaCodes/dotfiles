@@ -1,0 +1,39 @@
+{{ if eq .chezmoi.os "darwin" -}}
+if [[ -f "/opt/homebrew/bin/brew" ]] then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+{{ end -}}
+
+# Directories to append to PATH
+typeset -a append_dirs=(
+{{ if eq .chezmoi.os "darwin" -}}
+    ~/Library/Application\ Support/JetBrains/Toolbox/scripts
+    /Applications/RubyMine.app/Contents/MacOS
+{{ end -}}
+    $(go env GOPATH 2>/dev/null)/bin
+)
+
+# Directories to prepend to PATH
+typeset -a prepend_dirs=(
+{{ if eq .chezmoi.os "darwin" -}}
+    ~/.rbenv/bin
+    /opt/homebrew/opt/libpq/bin
+{{ end -}}
+)
+
+# Appending directories
+for dir in ${append_dirs[@]}; do
+    if [[ -d $dir ]]; then
+        path+=("$dir")
+    fi
+done
+
+# Prepending directories
+for dir in ${prepend_dirs[@]}; do
+    if [[ -d $dir ]]; then
+        path=("$dir" $path)
+    fi
+done
+
+# Export the updated PATH
+export PATH

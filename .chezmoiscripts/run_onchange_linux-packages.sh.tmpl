@@ -1,0 +1,28 @@
+{{ if eq .chezmoi.os "linux" -}}
+#!/bin/bash
+set -euo pipefail
+# Hash: {{ include ".chezmoidata/packages.yaml" | sha256sum }}
+
+echo "Installing packages via pacman..."
+
+sudo pacman -S --needed --noconfirm \
+{{ range .linux.pacman -}}
+    {{ . | quote }} \
+{{ end }}
+
+if command -v paru &>/dev/null; then
+    echo "Installing AUR packages via paru..."
+    paru -S --needed --noconfirm \
+{{ range .linux.aur -}}
+        {{ . | quote }} \
+{{ end }}
+elif command -v yay &>/dev/null; then
+    echo "Installing AUR packages via yay..."
+    yay -S --needed --noconfirm \
+{{ range .linux.aur -}}
+        {{ . | quote }} \
+{{ end }}
+else
+    echo "No AUR helper found. Install paru or yay to install AUR packages."
+fi
+{{ end -}}
