@@ -16,6 +16,7 @@ cask "todoist-app"
 cask "anki"
 cask "alt-tab"
 
+
 # Communication
 cask "discord"
 cask "zoom"
@@ -30,6 +31,7 @@ cask "transmission"
 cask "ghostty"
 
 # Dev tools (GUI)
+cask "gitbutler"
 cask "cursor"
 cask "visual-studio-code"
 cask "zed"
@@ -56,3 +58,8 @@ mas "Final Cut Pro", id: 424389933
 mas "keymapp", id: 6472865291
 mas "reMarkable", id: 1276493162
 mas "Tailscale", id: 1475387142
+mas "Pages", id: 409201541
+mas "Numbers", id: 409203825
+mas "Keynote", id: 409183694
+mas "Slack", id: 803453959
+mas "Sequel Ace", id: 1518036000

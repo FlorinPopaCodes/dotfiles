@@ -1,6 +1,5 @@
 {
   "permissions": {
-    "defaultMode": "default",
     "allow": [
       "Bash(git status:*)",
       "Bash(git log:*)",
@@ -9,13 +8,13 @@
       "Bash(git branch:*)",
       "Bash(git remote:*)",
       "Bash(git stash list)",
-
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
       "Bash(but status:*)",
       "Bash(but log:*)",
       "Bash(but diff:*)",
       "Bash(but show:*)",
       "Bash(but branch:*)",
-
       "Bash(cat:*)",
       "Bash(ls:*)",
       "Bash(find:*)",
@@ -30,19 +29,39 @@
       "Bash(mkdir:*)",
       "Bash(touch:*)",
       "Bash(cp:*)",
-
       "mcp__plugin_context7_*",
-
       "Skill(frontend-design:frontend-design)"
-    ]
+    ],
+    "defaultMode": "default"
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bash -c '\"/opt/homebrew/bin/bun\" \"$(ls -td ~/.claude/plugins/cache/claude-hud/claude-hud/*/ 2>/dev/null | head -1)src/index.ts\"'"
+  },
+  "enabledPlugins": {
+    "always-works-testing@florin-popa-marketplace": true,
+    "ast-grep@ast-grep-marketplace": false,
+    "code-review@claude-plugins-official": false,
+    "commit-commands@claude-plugins-official": true,
+    "feature-dev@claude-plugins-official": true,
+    "frontend-design@claude-plugins-official": true,
+    "plugin-dev@claude-plugins-official": false,
+    "security-guidance@claude-plugins-official": true,
+    "rails-codegen@florin-popa-marketplace": true,
+    "cognitive-load@florin-popa-marketplace": true,
+    "simplicity-first@florin-popa-marketplace": true,
+    "typescript-lsp@claude-plugins-official": true,
+    "cloudflare-toolkit@florin-popa-marketplace": false,
+    "sentry-skills@sentry-skills": true,
+    "claude-hud@claude-hud": true,
+    "context7@claude-plugins-official": true,
+    "astral@astral-sh": true,
+    "clangd-lsp@claude-plugins-official": true,
+    "gopls-lsp@claude-plugins-official": true,
+    "impeccable@impeccable": true,
+    "context-mode@claude-context-mode": true
   },
   "extraKnownMarketplaces": {
-    "beads-marketplace": {
-      "source": {
-        "source": "github",
-        "repo": "steveyegge/beads"
-      }
-    },
     "florin-popa-marketplace": {
       "source": {
         "source": "github",
@@ -56,50 +75,10 @@
       }
     }
   },
-  "hooks": {
-    "PreCompact": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bd prime"
-          }
-        ]
-      }
-    ],
-    "SessionStart": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bd prime"
-          }
-        ]
-      }
+  "sandbox": {
+    "autoAllowBashIfSandboxed": true,
+    "excludedCommands": [
+      "docker"
     ]
-  },
-  "statusLine": {
-    "type": "command",
-    "command": "~/.claude/statusline.sh"
-  },
-  "enabledPlugins": {
-    "always-works-testing@florin-popa-marketplace": true,
-    "ast-grep@ast-grep-marketplace": true,
-    "beads@beads-marketplace": true,
-    "code-review@claude-plugins-official": false,
-    "commit-commands@claude-plugins-official": true,
-    "feature-dev@claude-plugins-official": true,
-    "frontend-design@claude-plugins-official": true,
-    "learning-output-style@claude-plugins-official": false,
-    "plugin-dev@claude-plugins-official": false,
-    "security-guidance@claude-plugins-official": true,
-    "rails-codegen@florin-popa-marketplace": false,
-    "cognitive-load@florin-popa-marketplace": true,
-    "simplicity-first@florin-popa-marketplace": true,
-    "context7@claude-plugins-official": true,
-    "typescript-lsp@claude-plugins-official": true
-  },
-  "alwaysThinkingEnabled": true
+  }
 }

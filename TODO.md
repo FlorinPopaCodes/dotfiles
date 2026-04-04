@@ -1,13 +1,19 @@
-- [ ] Raycast sync
-- [ ] Claude Code whitelisted commands
-- [ ] ghc https://github.com/x-motemen/ghq
-- [ ] better brew-check, maybe a TUI?
-- [ ] make sure that all I work on is visible and accessible so that:
- - [ ] I don't lose any work
- - [ ] I don't lose any work out of my sight which makes it dissapear
-- [ ] add and trial https://github.com/SawyerHood/dev-browser
-- [ ] Claude code config notifications sync for ghostty
-- [ ] use keyd on arch to flip ctrl and alt
+- [x] Claude Code whitelisted commands
+- [x] autopull repository
+- [-] Claude code config notifications sync for ghostty
+- [x] ghc https://github.com/x-motemen/ghq
+- [x] Raycast sync
 - [ ] sync fonts
+- [ ] add and trial https://github.com/SawyerHood/dev-browser
+- [ ] use keyd on arch to flip ctrl and alt
+- [ ] make sure that all I work on is visible and accessible so that:
+  - [ ] I don't lose any work
+  - [ ] I don't lose any work out of my sight which makes it disappear
+- [x] better brew-check, maybe a TUI? → replaced with `just brew-sync`
 - [ ] add https://github.com/tw93/Mole
 - [ ] autopull repository
+- [ ] fix lefthook interaction with global git hooks
+- [ ] gtrash doesn't seem to work with sandbox...
+- [ ] add zed to sync
+- [ ] move commands out of the context
+- [ ] https://github.com/google/clasp

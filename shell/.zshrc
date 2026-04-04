@@ -92,18 +92,15 @@ fi
 # === FUNCTIONS ===
 # Clone GitHub repos to ~/Developer/owner/repo
 ghc() {
-  local url="$1"
-  local owner repo dest
-  if [[ "$url" =~ github\.com[:/]([^/]+)/([^/.]+) ]]; then
-    owner="${match[1]}"
-    repo="${match[2]%.git}"
-    dest="$HOME/Developer/$owner/$repo"
-    git clone "$url" "$dest" && cd "$dest"
-  else
-    echo "Invalid GitHub URL" >&2
-    return 1
-  fi
-}
+   local pat='github\.com[:/]([^/]+)/([^/.]+)'
+   [[ "$1" =~ $pat ]] || {
+     echo "Invalid GitHub URL" >&2
+     return 1
+   }
+   local dest="$HOME/Developer"
+   dest+="/${match[1]}/${match[2]%.git}"
+   git clone "$1" "$dest" && cd "$dest"
+ }
 
 # === ALIASES ===
 # Safe delete: gtrash moves to XDG trash (~/.local/share/Trash)
@@ -120,7 +117,10 @@ alias tree="eza --tree --icons"
 
 # Modern cd with zoxide
 alias j="cd"
+alias ji="cdi"
 alias c="claude"
+alias z="zed"
+alias _="sudo"
 
 # === ENVIRONMENT ===
 export EDITOR="nvim"
@@ -134,6 +134,7 @@ export SSH_AUTH_SOCK="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/
 [[ -d "$HOME/.duckdb/cli/latest" ]] && export PATH="$HOME/.duckdb/cli/latest:$PATH"
 [[ -s "$HOME/.bun/_bun" ]] && source "$HOME/.bun/_bun"
 [[ -f ~/.local/try.rb ]] && eval "$(ruby ~/.local/try.rb init ~/Developer/tries)"
+[[ -d "$HOME/.amp/bin" ]] && export PATH="$HOME/.amp/bin:$PATH"
 
 # === LOCAL OVERRIDES ===
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local

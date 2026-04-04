@@ -63,15 +63,15 @@ brew-dev: _ensure-macos _ensure-brew
 # Install all brew packages
 brew-all: brew-core brew-apps brew-dev
 
-# Check brew sync: shows missing from configs and missing from system
-brew-check: _ensure-macos _ensure-brew
-    @DOTFILES={{ dotfiles }} {{ dotfiles }}/scripts/brew-check.sh
-
 # Dump current brew packages to Brewfiles
 brew-dump: _ensure-macos _ensure-brew
     @echo "Dumping brew packages (backup before running)..."
     brew bundle dump --force --file={{ dotfiles }}/macos/Brewfile.dump
     @echo "Dumped to macos/Brewfile.dump"
+
+# Sync untracked brew packages into categorized Brewfiles
+brew-sync *args: _ensure-macos _ensure-brew
+    @DOTFILES={{ dotfiles }} {{ dotfiles }}/scripts/brew-sync.sh {{ args }}
 
 # === MACOS DEFAULTS ===
 
