@@ -6,6 +6,7 @@ TODO.md
 scripts/**
 .ruby-lsp/**
 claude/**
+.sprite
 
 {{ if ne .chezmoi.os "darwin" }}
 Library/**

@@ -32,3 +32,5 @@
     Don't make assumptions about adding backward compatibility. Ask for clarification.
   </assumptions>
 </claude-instructions>
+
+@RTK.md

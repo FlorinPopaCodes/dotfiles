@@ -46,11 +46,11 @@
 [gpg]
     format = ssh
 [gpg "ssh"]
-{{ if eq .chezmoi.os "darwin" -}}
+{{- if eq .chezmoi.os "darwin" }}
     program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
-{{ else -}}
+{{- else }}
     program = /opt/1Password/op-ssh-sign
-{{ end -}}
+{{- end }}
 {{ if not .isWork -}}
 [url "ssh://git@github.com/FlorinPopaCodes/"]
     insteadOf = https://github.com/FlorinPopaCodes/

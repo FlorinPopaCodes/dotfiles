@@ -3,8 +3,7 @@
 source $HOMEBREW_PREFIX/opt/zinit/zinit.zsh
 {{ else -}}
 source /usr/share/zinit/zinit.zsh
-{{ end -}}
-
+{{ end }}
 # === SHELL OPTIONS ===
 setopt AUTO_CD              # cd by typing directory name
 setopt AUTO_PUSHD           # cd pushes to directory stack
@@ -31,7 +30,6 @@ zinit wait lucid for \
     OMZP::docker \
     OMZP::docker-compose \
     OMZP::extract \
-    OMZP::fzf \
     OMZP::git \
     OMZP::gitignore \
     OMZP::golang \
@@ -40,7 +38,7 @@ zinit wait lucid for \
     OMZP::safe-paste \
     OMZP::sudo \
     OMZP::universalarchive
-{{ if eq .chezmoi.os "darwin" -}}
+{{ if eq .chezmoi.os "darwin" }}
 zinit wait lucid for \
     OMZP::brew \
     OMZP::bundler \
@@ -58,10 +56,6 @@ zinit wait lucid for \
     atload"zicompinit; zicdreplay" \
   zsh-users/zsh-completions
 
-# === FZF-TAB (after completions, before syntax highlighting) ===
-zinit wait lucid for \
-  Aloxaf/fzf-tab
-
 # === AUTOSUGGESTIONS + SYNTAX HIGHLIGHTING ===
 zinit wait lucid for \
     atload"_zsh_autosuggest_start" \
@@ -76,10 +70,9 @@ eval "$(starship init zsh)"
 # === DEFERRED TOOLS (turbo mode - run after prompt) ===
 zinit wait lucid for \
     atload'eval "$(direnv hook zsh)"' \
-{{ if eq .chezmoi.os "darwin" -}}
+{{- if eq .chezmoi.os "darwin" }}
     atload'eval "$(rbenv init - zsh)"' \
-{{ end -}}
-    atload'eval "$(fzf --zsh)"' \
+{{- end }}
     atload'eval $(thefuck --alias f)' \
     atload'eval "$(zoxide init zsh --cmd cd)"' \
   zdharma-continuum/null
@@ -123,6 +116,7 @@ alias tree="eza --tree --icons"
 alias j="cd"
 alias ji="cdi"
 alias c="claude"
+alias cc="claude -c"
 alias z="zed"
 alias _="sudo"
 
@@ -138,12 +132,15 @@ export BAT_THEME="gruvbox-dark"
 export SSH_AUTH_SOCK="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
 {{ else -}}
 export SSH_AUTH_SOCK="$HOME/.1password/agent.sock"
-{{ end -}}
-
+{{ end }}
 # === CONDITIONAL PATHS ===
 [[ -d "$HOME/.duckdb/cli/latest" ]] && export PATH="$HOME/.duckdb/cli/latest:$PATH"
 [[ -s "$HOME/.bun/_bun" ]] && source "$HOME/.bun/_bun"
 [[ -d "$HOME/.amp/bin" ]] && export PATH="$HOME/.amp/bin:$PATH"
+
+# === ATUIN ===
+. "$HOME/.atuin/bin/env"
+eval "$(atuin init zsh)"
 
 # === LOCAL OVERRIDES ===
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
